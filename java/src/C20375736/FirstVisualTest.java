@@ -15,49 +15,7 @@ import java.util.Scanner; // Import the Scanner class to read text files
 
 public class FirstVisualTest extends Visual{
 
-    public static void readFile(String filepath) {
     
-        try
-        {
-            File myObj = new File(filepath);
-            Scanner myReader = new Scanner(myObj);
-            
-            while (myReader.hasNextLine())
-            {
-                String data = myReader.nextLine();
-                //System.out.println(data);
-
-                if(!data.equals("Start"))
-                {
-                    System.out.println(getMindValue(data));
-                }
-                
-            }
-
-            myReader.close();
-        }
-        catch (FileNotFoundException e)
-        {
-            System.out.println("An error occurred.");
-            e.printStackTrace();
-        }
-    }
-
-    public static int getMindValue(String s)
-    {  //extract the mind reading value as an int from the input string
-
-        int beginIndex = s.indexOf(",") + 1;
-
-        String newString = s.substring(beginIndex);
-
-        int endIndex = newString.indexOf(",");
-
-        newString = newString.substring(0, endIndex);
-        
-        int mindValue = Integer.parseInt(newString);
-
-        return mindValue;
-    }
 
     File myObj;
     Scanner myReader;
@@ -85,7 +43,21 @@ public class FirstVisualTest extends Visual{
         //fullScreen(P3D, SPAN); 
     }
 
-   
+    public static int getMindValue(String s)
+    {  //extract the mind reading value as an int from the input string
+
+        int beginIndex = s.indexOf(",") + 1;
+
+        String newString = s.substring(beginIndex);
+
+        int endIndex = newString.indexOf(",");
+
+        newString = newString.substring(0, endIndex);
+        
+        int mindValue = Integer.parseInt(newString);
+
+        return mindValue;
+    }
 
 
     public void draw()
@@ -109,16 +81,35 @@ public class FirstVisualTest extends Visual{
             }
             
         }
-
-        
-
-        //readFile("java/src/C20375736/mfReadings.txt");
-
-        
-        
-
-
-
+       
     }
+
+    // public static void readFile(String filepath) {
+    
+    //     try
+    //     {
+    //         File myObj = new File(filepath);
+    //         Scanner myReader = new Scanner(myObj);
+            
+    //         while (myReader.hasNextLine())
+    //         {
+    //             String data = myReader.nextLine();
+    //             //System.out.println(data);
+
+    //             if(!data.equals("Start"))
+    //             {
+    //                 System.out.println(getMindValue(data));
+    //             }
+                
+    //         }
+
+    //         myReader.close();
+    //     }
+    //     catch (FileNotFoundException e)
+    //     {
+    //         System.out.println("An error occurred.");
+    //         e.printStackTrace();
+    //     }
+    // }
 
 }
