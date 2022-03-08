@@ -21,8 +21,8 @@ public class Audio1 extends PApplet
     {
         minim = new Minim(this);
   
-        ap = minim.loadFile("ambiTestTrack.mp3", 1024);
-        ap1 = minim.loadFile("drumTestTrack.mp3", 1024);
+        ap = minim.loadFile("ambi.mp3", 1024);
+        ap1 = minim.loadFile("drums.mp3", 1024);
         ap.play();
         ap1.play();
       
