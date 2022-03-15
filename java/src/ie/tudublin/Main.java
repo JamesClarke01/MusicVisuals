@@ -1,6 +1,7 @@
 package ie.tudublin;
 
 import C20375736.FirstVisualTest;
+import C20375736.first3dTest;
 import C20375736.Audio1;
 
 
@@ -25,9 +26,15 @@ public class Main
         processing.core.PApplet.runSketch( a, new Audio1());		
 	}
 
+	public void startFirst3dTest()
+	{
+		String[] a = {"MAIN"};
+        processing.core.PApplet.runSketch( a, new first3dTest());		
+	}
+
 	public static void main(String[] args)
 	{
 		Main main = new Main();
-		main.startAudio1();			
+		main.startFirst3dTest();			
 	}
 }
