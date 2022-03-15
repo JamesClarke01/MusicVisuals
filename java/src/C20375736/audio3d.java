@@ -43,7 +43,7 @@ public class audio3d extends PApplet
         lerpedBuffer = new float[width];
     }
 
-
+	float rot = 0;
 
     public void draw()
     {
@@ -66,16 +66,19 @@ public class audio3d extends PApplet
         
 
         System.out.println(smoothedAmplitude);
-        
+		
+		rot += smoothedAmplitude;
+
         background(0);
 
+    
         
-        
-        translate(width/2, height/4); 
+        translate(width/2, height/2); 
         
         fill(255, 243, 77);
-
-        box(50, map(smoothedAmplitude, 0, 0.1f, 0, 100), 50);  //w, h, d
+		rotateX(rot);
+		rotateY(rot);
+        box(map(smoothedAmplitude, 0, 0.1f, 0, 100));  //w, h, d
         
         
 
