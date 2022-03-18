@@ -70,14 +70,14 @@ public class audio3d extends PApplet
         
 		//rot += smoothedAmplitude;
 
-        background(28, 221, 255);
+        // background(28, 221, 255);
 
-        translate(width/4, height/2); 
+        // translate(width/4, height/2); 
         
 
-        tree1 = new Tree(100, this);
+        // tree1 = new Tree(100, this);
 
-        tree1.drawTree();
+        // tree1.drawTree();
 
 
 

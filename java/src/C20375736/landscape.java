@@ -45,7 +45,7 @@ public class landscape extends PApplet
 
 	float rot = 0;
 
-    Tree tree1;
+    Tree tree;
     public void draw()
     {
 
@@ -71,17 +71,27 @@ public class landscape extends PApplet
 	
 
         background(28, 221, 255);
+        
+        translate(width/2, (float)(height * 0.75));
+        fill(56, 232, 53);  //ground colour
+        box(width*2, 1, 750); //ground
 
-        translate(width/4, height/2); 
+
+
+        translate(-(width),0);
+            
+        float treePosX = 0;
+
+        while(treePosX <= width*2)
+        {
+            tree = new Tree(150, this);
+            translate(treePosX, 0);
+            tree.draw();
+            treePosX+=5;
+        }
+        
         
 
-        tree1 = new Tree(100, this);
-
-        tree1.drawTree();
-
-
-
-        
         
 
     }        

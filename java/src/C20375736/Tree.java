@@ -7,25 +7,27 @@ public class Tree{
 
     float sphereRadius, trunkLength, trunkWidth;
 
-    public Tree(float sphereRadius, PApplet pa)
+    public Tree(float height, PApplet pa)
     {
         this.pa = pa;
        
-        this.sphereRadius = sphereRadius;
+        sphereRadius = height/4;
 
-        trunkLength = sphereRadius * 2;
+        trunkLength = height/2;
 
-        trunkWidth = sphereRadius/2;
+        trunkWidth = height/8;
 
 
     }
 
-    public void drawTree()
+    public void draw()
     {
         pa.pushMatrix();
-
+    
+        pa.noStroke();  //comment for outlines
+        
+        pa.translate(0, -trunkLength);
         pa.fill(21, 161, 26);  //tree colour
-        pa.noStroke();
         pa.sphere(sphereRadius);
 
         pa.translate(0, trunkLength/2); 
