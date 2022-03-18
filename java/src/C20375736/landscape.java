@@ -6,7 +6,7 @@ import ddf.minim.AudioPlayer;
 import ddf.minim.Minim;
 import processing.core.PApplet;
 
-public class audio3d extends PApplet
+public class landscape extends PApplet
 {
     Minim minim;
     AudioPlayer ap;
@@ -68,7 +68,7 @@ public class audio3d extends PApplet
 
         // System.out.println(smoothedAmplitude);
         
-		//rot += smoothedAmplitude;
+	
 
         background(28, 221, 255);
 
@@ -81,27 +81,6 @@ public class audio3d extends PApplet
 
 
 
-        //pushMatrix();
-
-
-        // fill(41, 230, 60);  //tree colour
-        // //noStroke();
-        // sphere(100);
-
-
-        // fill(51, 5, 5);  //trunk colour
-        // translate(0, height/4); 
-        // box(50, height/2, 50);
-
-        // popMatrix();
-
-        // fill(242, 22, 22);
-        // box(500,1,500);
-
-		// rotateX(rot);
-		// rotateY(rot);
-        // box(map(smoothedAmplitude, 0, 0.1f, 0, 100));  //w, h, d
-        
         
         
 

@@ -4,6 +4,7 @@ import C20375736.FirstVisualTest;
 import C20375736.audio3d;
 import C20375736.audioExample;
 import C20375736.first3dTest;
+import C20375736.landscape;
 import C20375736.Audio1;
 
 
@@ -46,11 +47,16 @@ public class Main
         processing.core.PApplet.runSketch( a, new audio3d());		
 	}
 	
+	public void startLandscape()
+	{
+		String[] a = {"MAIN"};
+        processing.core.PApplet.runSketch( a, new landscape());		
+	}
 	
 
 	public static void main(String[] args)
 	{
 		Main main = new Main();
-		main.startAudio3d();			
+		main.startLandscape();			
 	}
 }
