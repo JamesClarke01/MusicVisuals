@@ -10,7 +10,7 @@ public class Landscape
     
     final int TREEAMOUNT = 10; //will be made a dynamic value later
     
-    float treePosArray[];
+    Tree treeArray[];
 
     public Landscape(PApplet pa)
     {
@@ -20,25 +20,24 @@ public class Landscape
     }
     
     public void initTreeArray(int treeAmount)  //call this in constructor
-    {  //populates the treePosArray with the x positions of each tree
+    {  //populates the treeArray with the x positions of each tree
 
-        treePosArray = new float[treeAmount]; //initialise array
+        treeArray = new Tree[treeAmount]; //initialise array
 
         float increment = (float)(pa.width/(treeAmount-1)); //treeAmount must be decremented to account for tree at first pos and end pos
 
         float treePosX = 0;
-        
+        Tree newTree;
 
         for(int i = 0; i < treeAmount; i++)
         {
-            treePosArray[i] = treePosX;  //a tree must be added in 0 position
+            newTree = new Tree(pa, 150, treePosX, 0, 0);  //tree x and y left blank for now
+            treeArray[i] = newTree; 
             treePosX += increment;
         }
     }
 
     
-    
-
     public void render()
     {
         pa.background(28, 221, 255);
@@ -49,16 +48,12 @@ public class Landscape
         
         pa.box(pa.width*2, 1, 750); //draws ground (hard coded values need to be removed)
 
-        pa.translate(-(pa.width/2),0);
+        pa.translate(-(pa.width/2),0);  //set the current drawing pos to the far left of the screen
             
-        for(int i = 0; i < treePosArray.length; i++)
+        
+        for(int i = 0; i < treeArray.length; i++)
         {
-            pa.pushMatrix(); //push 0,0 coords onto matrix stack
-            pa.translate(treePosArray[i], 0);  //translate to coords of current tree
-            
-            Tree tree = new Tree(pa, 150);
-            tree.draw();
-            pa.popMatrix(); //return to 0,0 coords
+            treeArray[i].draw();
         }
 
         
