@@ -15,17 +15,23 @@ public class Tree{
         this.yPos = yPos;
         this.zPos = zPos;
        
+        // sphereRadius = height/4;
+
+        // trunkLength = height/2;
+
+        // trunkWidth = height/8;
+
+
+    }
+
+    public void render(float height)
+    {
         sphereRadius = height/4;
 
         trunkLength = height/2;
 
         trunkWidth = height/8;
 
-
-    }
-
-    public void draw()
-    {
         pa.pushMatrix();
         pa.translate(xPos,yPos,zPos);  //go to tree position
 
