@@ -8,11 +8,23 @@ public class Landscape
 {
     PApplet pa;
     
+    float[] treePosArray;
+
+    int TREEAMOUNT = 10;
+    
+
     public Landscape(PApplet pa)
     {
         this.pa = pa;
+
+        
     }
     
+    // public void createTreeArray()  //initaise this in constructor
+    // {
+    //     fo
+
+    // }
 
     Tree tree;
 
@@ -20,33 +32,30 @@ public class Landscape
     {
         pa.background(28, 221, 255);
         
-        pa.translate(pa.width/2, (float)(pa.height * 0.75));  //translate to ground level
-        
+        //pa.translate(pa.width/2, (float)(pa.height * 0.75));  //translate to ground level
+        pa.translate(pa.width/2, pa.height);
         pa.fill(56, 232, 53);  //ground colour
         pa.box(pa.width*2, 1, 750); //ground
 
 
 
-        pa.translate(-(pa.width),0);
+        pa.translate(-(pa.width/2),0);
             
+        int treeAmount = 15;
+
+        float increment = (float)(pa.width/(treeAmount-1)); //treeAmount must be decremented to account for tree at first pos and end pos
+
         float treePosX = 0;
 
-        while(treePosX <= pa.width*2)
+        while(treePosX < pa.width)
         {
-            tree = new Tree(150, pa);
-            pa.translate(treePosX, 0);
+            tree = new Tree(pa, 150);
             tree.draw();
-            treePosX+=5;
+            pa.translate(increment, 0);
+            treePosX+=increment;
         }
     }
 
 }
 
 
-// float[] treePosArray;
-
-    // public void createTreeArray()  //may have to make this less globally later
-    // {
-    //     for 
-
-    // }

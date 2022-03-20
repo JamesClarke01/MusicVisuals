@@ -7,7 +7,7 @@ public class Tree{
 
     float sphereRadius, trunkLength, trunkWidth;
 
-    public Tree(float height, PApplet pa)
+    public Tree(PApplet pa, float height)
     {
         this.pa = pa;
        
