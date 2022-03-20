@@ -7,6 +7,7 @@ public class Tree{
 
     float sphereRadius, trunkLength, trunkWidth, xPos, yPos, zPos;
 
+
     public Tree(PApplet pa, float height, float xPos, float yPos, float zPos)
     {
         this.pa = pa;
@@ -15,22 +16,27 @@ public class Tree{
         this.yPos = yPos;
         this.zPos = zPos;
        
-        // sphereRadius = height/4;
-
-        // trunkLength = height/2;
-
-        // trunkWidth = height/8;
-
-
-    }
-
-    public void render(float height)
-    {
         sphereRadius = height/4;
 
         trunkLength = height/2;
 
         trunkWidth = height/8;
+
+    }
+
+    public float getSphereRadius()
+    {
+        return sphereRadius;
+    }
+
+    public void setSphereRadius(float sphereRadius)
+    {
+        this.sphereRadius = sphereRadius;
+    }
+
+    public void render()
+    {
+        
 
         pa.pushMatrix();
         pa.translate(xPos,yPos,zPos);  //go to tree position
