@@ -12,7 +12,7 @@ import ddf.minim.AudioBuffer;
 public class Landscape
 {
     //audio variables
-    float[] lerpedBuffer;
+    //float[] lerpedBuffer;
     float smoothedAmplitude = 0;
 
     //end audio variables
@@ -29,7 +29,7 @@ public class Landscape
 
         initTreeArray(TREEAMOUNT);
 
-        lerpedBuffer = new float[TREEAMOUNT];  //initialise lerped buffer to amount of trees
+        //lerpedBuffer = new float[TREEAMOUNT];  //initialise lerped buffer to amount of trees
     }
     
 
@@ -65,15 +65,17 @@ public class Landscape
 
             singleTreeAverage = singleTreeSum/TREEAMOUNT;
 
+            //System.out.println(singleTreeAverage);
 
-            lerpedBuffer[i] = pa.lerp(lerpedBuffer[i], singleTreeAverage, 0.1f);
+            //this line needs some tweaking
+            treeArray[i].setSphereRadius(pa.lerp(treeArray[i].getSphereRadius(), pa.map(singleTreeAverage, -1, 1, 0, 50) ,  0.1f));
         }
         
 
         for(int i = 0; i < treeArray.length; i++)
         {
-            treeArray[i].render(150 +(lerpedBuffer[i] * 300));
-
+            treeArray[i].render();
+            //treeArray[i].render(lerpedBuffer[i]);
             //System.out.println(lerpedBuffer[i]);
         }
 

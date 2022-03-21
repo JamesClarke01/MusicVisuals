@@ -27,6 +27,7 @@ public class Visualisation extends PApplet{
         minim = new Minim(this);
 
         ambiPlayer = minim.loadFile("ambiTestTrack.mp3", 1024);
+        //ambiPlayer = minim.loadFile("drumTestTrack.mp3", 1024);
         ambiPlayer.play();
         ambiBuffer = ambiPlayer.mix;  //mix means mix right and left stereo
 
