@@ -24,15 +24,6 @@ public class Tree{
 
     }
 
-	int count = 0;
-	public void drawBranch(float depth)
-	{
-		if(depth <= 3 || depth >= 1) //max depth of tree will be 5, I don't want the heckin' jvm to slurp all my RAM
-		{
-				drawBranch(pa.random(1,depth));//garuntees that the depth of the next branch/subtree will always be less
-		}
-	}
-
     public void render(float height)
     {
         sphereRadius = height/4;
@@ -45,15 +36,12 @@ public class Tree{
         pa.translate(xPos,yPos,zPos);  //go to tree position
 
     
-        //pa.noStroke();  //comment for outlines
+        pa.noStroke();  //comment for outlines
         
         //for drawing head
         pa.translate(0, -trunkLength);
         pa.fill(21, 161, 26);  //tree colour
-		pa.sphereDetail(5); //make the heads look a bit chunky
         pa.sphere(sphereRadius);
-		pa.rotateY(pa.map(height,0,1,0,pa.PI));
-		pa.sphere(sphereRadius);
 
         //for drawing trunk
         pa.translate(0, trunkLength/2); 
