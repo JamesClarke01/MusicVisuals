@@ -19,7 +19,7 @@ public class Landscape
 
     PApplet pa;
     
-    final int TREEAMOUNT = 20; //will be made a dynamic value later
+    final int TREEAMOUNT = 10; //will be made a dynamic value later
     
     Tree treeArray[];
 
@@ -106,7 +106,7 @@ public class Landscape
         for(int i = 0; i < treeAmount; i++)
         {
             treeSize = pa.random(100, 150);
-            newTree = new Tree(pa, treeSize, treePosX, 0, 0);  //tree x and y left blank for now
+            newTree = new Tree(pa, treeSize, treePosX, 0, 0);  //tree y and z left blank for now
             treeArray[i] = newTree; 
             treePosX += increment;
         }
