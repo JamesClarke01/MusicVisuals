@@ -42,13 +42,15 @@ public class Tree{
         pa.translate(xPos,yPos,zPos);  //go to tree position
 
     
-        pa.noStroke();  //comment for outlines
+       // pa.noStroke();  //comment for outlines
         
         //for drawing head
         pa.translate(0, -trunkLength);
         pa.fill(21, 161, 26);  //tree colour
+		pa.sphereDetail(5);
         pa.sphere(sphereRadius);
-
+		pa.rotateY(pa.map(sphereRadius,0,1,0,pa.PI));
+		pa.sphere(sphereRadius);
         //for drawing trunk
         pa.translate(0, trunkLength/2); 
         pa.fill(51, 5, 5);  //trunk colour
