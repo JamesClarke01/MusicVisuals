@@ -22,7 +22,7 @@ public class Landscape
     final int TREEAMOUNT = 20; //will be made a dynamic value later
     
     Tree treeArray[];
-
+	Clouds Cloud;
     public Landscape(PApplet pa)
     {
         this.pa = pa;
