@@ -20,14 +20,14 @@ public class Landscape
     PApplet pa;
     
     final int TREEAMOUNT = 20; //will be made a dynamic value later
-    
+	Cloud cloud;	    
     Tree treeArray[];
-	Clouds Cloud;
     public Landscape(PApplet pa)
     {
         this.pa = pa;
 
         initTreeArray(TREEAMOUNT);
+		initCloud();
 
         //lerpedBuffer = new float[TREEAMOUNT];  //initialise lerped buffer to amount of trees
     }
@@ -78,7 +78,7 @@ public class Landscape
             //treeArray[i].render(lerpedBuffer[i]);
             //System.out.println(lerpedBuffer[i]);
         }
-
+		cloud.render();
     }
 
 
@@ -111,8 +111,13 @@ public class Landscape
             newTree = new Tree(pa, treeSize, treePosX, 0, 0);  //tree x and y left blank for now
             treeArray[i] = newTree; 
             treePosX += increment;
-        }
+        }	
     }
+	
+	public void initCloud()
+	{
+		cloud = new Cloud(pa) ;	
+	}
 
 }
 

@@ -54,7 +54,7 @@ public class Visualisation extends PApplet{
 		}
 		if(mouseX > width/2)
 		{
-			drumGain = map(mouseX, width/2 + 1, width,-10, 20);
+			drumGain = map(mouseX, width/2 + 1, width,-10, 40);
 			drumPlayer.shiftGain(drumPlayer.getGain(),drumGain,200);
 			ambiPlayer.setGain(20);
 		}
