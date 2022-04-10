@@ -22,25 +22,29 @@ public class Cloud
 
 
 		hPos = pa.height/5;
-		leftMax = -250;
+		leftMax = -400;
 		rightMax = pa.width + 100;
 		cent = pa.width/2;
-		ySize = 300;
-		xGap = 50;
-		yGap = 30;
+		ySize = 400;
+		xGap = 25;
+		yGap = 15;
 		xCount = (int)(rightMax -leftMax / xGap);
 		yCount = (int)(ySize/yGap);
 
 
 		heights = new float[xCount][yCount];
 
-
+		float yoff = 0;
 		for(int i = 0; i < yCount; i++)
 		{
+			float xoff = 0;
 			for(int j = 0; j < xCount; j++)
 			{
-				heights[j][i] = pa.random(-50,50);
+		
+				heights[j][i] = pa.map(pa.noise(xoff,yoff),0,1,-50,50);
+				xoff += 0.4;
 			}
+			yoff += 0.4;
 		}
 	}
 	
@@ -51,7 +55,7 @@ public class Cloud
 		pa.pushMatrix();
 		//shapes and stuff go here
 
-		pa.translate(leftMax,-pa.height - 110,0);//Sets the postition of the cloud
+		pa.translate(leftMax,-pa.height - 150,0);//Sets the postition of the cloud
 		pa.rotateX(pa.PI * 1.7f);
 		pa.fill(100);
 		for(int i = 0; i < yCount-1; i++)
