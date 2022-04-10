@@ -12,7 +12,7 @@ public class Cloud
 	
 	float xGap, yGap;
 	int xCount,yCount;
-	
+	float rolling; 	
 	float[][] heights;
 	
 
@@ -31,7 +31,7 @@ public class Cloud
 		xCount = (int)(rightMax -leftMax / xGap);
 		yCount = (int)(ySize/yGap);
 
-
+		rolling = 0;
 		heights = new float[xCount][yCount];
 
 		float yoff = 0;
@@ -51,7 +51,19 @@ public class Cloud
 
 	public void render()
 	{
+		rolling += 0.01;
+		float yoff = rolling;
+		for(int i = 0; i < yCount; i++)
+		{
+			float xoff = 0;
+			for(int j = 0; j < xCount; j++)
+			{
 		
+				heights[j][i] = pa.map(pa.noise(xoff,yoff),0,1,-50,50);
+				xoff += 0.4;
+			}
+			yoff += 0.4;
+		}
 		pa.pushMatrix();
 		//shapes and stuff go here
 
