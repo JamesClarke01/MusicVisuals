@@ -8,10 +8,13 @@ public class Cloud
 {
 	PApplet pa;
 
-	float hPos, leftMax, rightMax, cent;
-	int gap = 50;//length of gaps between vertexes
-	int offset = 50;
-	int gaps; 
+	float hPos, leftMax, rightMax, cent, ySize;
+	
+	float xGap, yGap;
+	int xCount,yCount;
+	
+	float[][] heights;
+	
 
 	public Cloud(PApplet pa)
 	{
@@ -19,10 +22,26 @@ public class Cloud
 
 
 		hPos = pa.height/5;
-		leftMax = -100;
+		leftMax = -250;
 		rightMax = pa.width + 100;
 		cent = pa.width/2;
-		gaps = (int)rightMax/gap;
+		ySize = 300;
+		xGap = 50;
+		yGap = 30;
+		xCount = (int)(rightMax -leftMax / xGap);
+		yCount = (int)(ySize/yGap);
+
+
+		heights = new float[xCount][yCount];
+
+
+		for(int i = 0; i < yCount; i++)
+		{
+			for(int j = 0; j < xCount; j++)
+			{
+				heights[j][i] = pa.random(-50,50);
+			}
+		}
 	}
 	
 
@@ -32,16 +51,16 @@ public class Cloud
 		pa.pushMatrix();
 		//shapes and stuff go here
 
-		pa.translate(0,-pa.height,0);//Resets the postition of the cloud to 0,0,0
-		pa.translate(leftMax,hPos,0);
+		pa.translate(leftMax,-pa.height - 110,0);//Sets the postition of the cloud
+		pa.rotateX(pa.PI * 1.7f);
 		pa.fill(100);
-		for(int j = 1; j < 4; j++)
+		for(int i = 0; i < yCount-1; i++)
 		{
 			pa.beginShape(pa.TRIANGLE_STRIP);
-			for(int i = 0; i <gaps+2 ; i++)
+			for(int j = 0; j < xCount; j++)
 			{
-				pa.vertex(gap * i, offset*j, 0);
-				pa.vertex((gap * i) + gap/2, offset * (j+1), 0);
+				pa.vertex(xGap * j,hPos + (yGap * i),heights[j][i]);
+				pa.vertex(xGap * j,hPos + (yGap * (i+1)),heights[j][i+1]);
 			}
 			pa.endShape();
 		}
