@@ -98,6 +98,8 @@ public class Visualisation extends PApplet{
                             if (bGoodData)
                             {
                                 System.out.println("Sig: "+ MindFlexReader.signalQuality + " Att: " + MindFlexReader.attention); 
+                                drumGain = map(MindFlexReader.attention, 0, 100,-20, 15);   //change the volume of drumtrack based on mouseY, -20 to 15 is a good range for drum volumes
+                                drumPlayer.shiftGain(drumPlayer.getGain(),drumGain,200); 
                 
                             }
                         }
@@ -106,7 +108,7 @@ public class Visualisation extends PApplet{
                     catch (Exception e)
                     {
                         System.out.println("No Signal!");
-                        Thread.sleep(5); //wait
+                        //Thread.sleep(5); //wait
                     }
 
                 }
