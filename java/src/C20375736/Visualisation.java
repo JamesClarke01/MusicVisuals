@@ -34,10 +34,12 @@ public class Visualisation extends PApplet{
     public void keyPressed() {
         if (key == '1')  //mouse mode
         {
+            System.out.println("Switching to mouse mode");
             mode = 1;
         }
         else if (key == '2')  //brain mode
         {
+            System.out.println("Switching to eeg mode");
             mode = 2;
         }
     }
@@ -75,33 +77,51 @@ public class Visualisation extends PApplet{
 	public float drumGain;
     public void draw()
     {   
-
-        try
+        switch (mode)
         {
-            byte[] byteBuffer = new byte[comPort.bytesAvailable()];  //create a buffer of length of bytes available
-            
-            comPort.readBytes(byteBuffer, byteBuffer.length);  //read bytes into buffer
-
-            for(int i = 0; i < byteBuffer.length; i++)  //loop through byte buffer
+            case 1:  //mouse mode
             {
-                byte b = byteBuffer[i];
-
-                boolean bGoodData = MindFlexReader.AddByte(Byte.toUnsignedInt(b)); //will return true when a complete packet has been processed
-
-                if (bGoodData)
-                {
-                    System.out.println("Sig: "+ MindFlexReader.signalQuality + " Att: " + MindFlexReader.attention); 
-                    drumGain = map(MindFlexReader.attention, 0, 100, DRUM_GAIN_MIN, DRUM_GAIN_MAX);   //change the volume of drumtrack based on mouseY, -20 to 15 is a good range for drum volumes
-                    drumPlayer.shiftGain(drumPlayer.getGain(),drumGain,200); 
-    
-                }
+                drumGain = map(mouseY, height, 0, DRUM_GAIN_MIN, DRUM_GAIN_MAX);   //change the volume of drumtrack based on mouseY, -20 to 5 is a good range for drum volumes
+                drumPlayer.shiftGain(drumPlayer.getGain(),drumGain,200);  
+                break;  //break must be here
             }
+            case 2:
+            {
+                try
+                {
+                    byte[] byteBuffer = new byte[comPort.bytesAvailable()];  //create a buffer of length of bytes available
+                    
+                    comPort.readBytes(byteBuffer, byteBuffer.length);  //read bytes into buffer
+
+                    for(int i = 0; i < byteBuffer.length; i++)  //loop through byte buffer
+                    {
+                        byte b = byteBuffer[i];
+
+                        boolean bGoodData = MindFlexReader.AddByte(Byte.toUnsignedInt(b)); //will return true when a complete packet has been processed
+
+                        if (bGoodData)
+                        {
+                            System.out.println("Sig: "+ MindFlexReader.signalQuality + " Att: " + MindFlexReader.attention); 
+                            drumGain = map(MindFlexReader.attention, 0, 100, DRUM_GAIN_MIN, DRUM_GAIN_MAX);   //change the volume of drumtrack based on mouseY, -20 to 15 is a good range for drum volumes
+                            drumPlayer.shiftGain(drumPlayer.getGain(),drumGain,200); 
             
-        }
-        catch (Exception e)
-        {
-            System.out.println("No Signal!");
-            //Thread.sleep(5); //wait
+                        }
+                    }
+                    
+                }
+                catch (Exception e)
+                {
+                    System.out.println("No Signal!");
+                    //Thread.sleep(5); //wait
+                }
+
+                break;
+            }
+
+            default:
+            {
+                drumPlayer.setGain(-30);
+            }
         }
 
         landscape.render(ambiBuffer);
