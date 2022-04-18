@@ -10,6 +10,7 @@ import processing.core.PApplet;
 import ddf.minim.AudioBuffer;
 import ddf.minim.AudioPlayer;
 import ddf.minim.Minim;
+import C20375736.MindFlexReader;
 
 public class Visualisation extends PApplet{
 
@@ -17,6 +18,8 @@ public class Visualisation extends PApplet{
     SerialPort comPort;
 
     Landscape landscape;
+
+    //float drumGain;
    
 
     //audio stuff variables
@@ -25,11 +28,16 @@ public class Visualisation extends PApplet{
     AudioBuffer ambiBuffer;
 	AudioPlayer drumPlayer;
 	AudioBuffer drumBuffer;
+    AudioPlayer bassPlayer;
+	AudioBuffer bassBuffer;
     
+    float musicModifier;  //value from 0-100
+
+    //for mode switch statemnet
     int mode = 0;
 
-    final int DRUM_GAIN_MIN  = -20;
-    final int DRUM_GAIN_MAX = 5;
+    final int GAIN_MIN  = -20;
+    final int GAIN_MAX = 5;
 
     public void keyPressed() {
         if (key == '1')  //mouse mode
@@ -55,34 +63,67 @@ public class Visualisation extends PApplet{
         minim = new Minim(this);
 
         ambiPlayer = minim.loadFile("ambiTestTrack.mp3", 1024);
-        drumPlayer = minim.loadFile("drumTestTrack.mp3", 1024);
+        drumPlayer = minim.loadFile("drumsTestTrack.mp3", 1024);
+        bassPlayer = minim.loadFile("bassTestTrack.mp3", 1024);
         ambiPlayer.play();
 		drumPlayer.play();
+        bassPlayer.play();
         ambiBuffer = ambiPlayer.mix;  //mix means mix right and left stereo
         drumBuffer = drumPlayer.mix;  //mix means mix right and left stereo
-		
+		bassBuffer = bassPlayer.mix;  //mix means mix right and left stereo
 
         //create landscape
         landscape = new Landscape(this);
 
         //eeg setup
-        System.out.println("Opening Comport");
+        try
+        {
+            openComport();
+            System.out.println("Comport opened");
+        }
+        catch (Exception e)
+        {
+            System.out.println("Failed to open comport");
+        }
+    }
 
+    public void openComport()
+    {
         comPort = SerialPort.getCommPorts()[2];  
         
         comPort.openPort();
     }
 
+    public void setStemsGain(float x)
+    {
+        float drumGain, bassGain;
 
-	public float drumGain;
+        final int DRUMSTART = 50;
+
+        if(x <= DRUMSTART)  //bass will dynamically increase and drums are muted
+        {
+            bassGain = map(x, 0, DRUMSTART, GAIN_MIN, GAIN_MAX);
+            drumGain = GAIN_MIN; 
+        }
+        else  //bass is at max volume and drums will dynamically increase
+        {
+            bassGain = GAIN_MAX;
+            drumGain = map(x, DRUMSTART + 1, 100, GAIN_MIN, GAIN_MAX);
+        }
+
+        drumPlayer.shiftGain(drumPlayer.getGain(),drumGain,200); 
+        bassPlayer.shiftGain(bassPlayer.getGain(),bassGain,200); 
+        
+    }
+	
     public void draw()
     {   
         switch (mode)
         {
             case 1:  //mouse mode
             {
-                drumGain = map(mouseY, height, 0, DRUM_GAIN_MIN, DRUM_GAIN_MAX);   //change the volume of drumtrack based on mouseY, -20 to 5 is a good range for drum volumes
-                drumPlayer.shiftGain(drumPlayer.getGain(),drumGain,200);  
+                musicModifier = map(mouseY, height, 0, 0, 100);
+                setStemsGain(musicModifier);
                 break;  //break must be here
             }
             case 2:
@@ -102,8 +143,8 @@ public class Visualisation extends PApplet{
                         if (bGoodData)
                         {
                             System.out.println("Sig: "+ MindFlexReader.signalQuality + " Att: " + MindFlexReader.attention); 
-                            drumGain = map(MindFlexReader.attention, 0, 100, DRUM_GAIN_MIN, DRUM_GAIN_MAX);   //change the volume of drumtrack based on mouseY, -20 to 15 is a good range for drum volumes
-                            drumPlayer.shiftGain(drumPlayer.getGain(),drumGain,200); 
+                            
+                            setStemsGain(MindFlexReader.attention);
             
                         }
                     }
@@ -112,7 +153,7 @@ public class Visualisation extends PApplet{
                 catch (Exception e)
                 {
                     System.out.println("No Signal!");
-                    //Thread.sleep(5); //wait
+                    openComport();
                 }
 
                 break;
@@ -121,6 +162,7 @@ public class Visualisation extends PApplet{
             default:
             {
                 drumPlayer.setGain(-30);
+                bassPlayer.setGain(-30);
             }
         }
 
