@@ -24,6 +24,9 @@ public class Visualisation extends PApplet{
     
     int mode = 0;
 
+    final int DRUM_GAIN_MIN  = -20;
+    final int DRUM_GAIN_MAX = 5;
+
     public void keyPressed() {
         if (key == '1')  //mouse mode
         {
@@ -61,14 +64,14 @@ public class Visualisation extends PApplet{
 
 	public float drumGain;
     public void draw()
-    {
-       
- 
+    {   
+
+        
 		switch (mode)
         {
             case 1:  //mouse mode
             {
-                drumGain = map(mouseY, height, 0,-20, 15);   //change the volume of drumtrack based on mouseY, -20 to 15 is a good range for drum volumes
+                drumGain = map(mouseY, height, 0, DRUM_GAIN_MIN, DRUM_GAIN_MAX);   //change the volume of drumtrack based on mouseY, -20 to 5 is a good range for drum volumes
                 drumPlayer.shiftGain(drumPlayer.getGain(),drumGain,200);  
                 break;  //break must be here
             }
@@ -98,7 +101,7 @@ public class Visualisation extends PApplet{
                             if (bGoodData)
                             {
                                 System.out.println("Sig: "+ MindFlexReader.signalQuality + " Att: " + MindFlexReader.attention); 
-                                drumGain = map(MindFlexReader.attention, 0, 100,-20, 15);   //change the volume of drumtrack based on mouseY, -20 to 15 is a good range for drum volumes
+                                drumGain = map(MindFlexReader.attention, 0, 100, DRUM_GAIN_MIN, DRUM_GAIN_MAX);   //change the volume of drumtrack based on mouseY, -20 to 15 is a good range for drum volumes
                                 drumPlayer.shiftGain(drumPlayer.getGain(),drumGain,200); 
                 
                             }
