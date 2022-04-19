@@ -40,8 +40,6 @@ public class Landscape
     }
 
     
-
-
     public void drawBackground()
     {
         pa.background(28, 221, 255);
@@ -50,9 +48,6 @@ public class Landscape
         
         pa.box(pa.width*2, 1, 750); //draws ground (hard coded values need to be removed)
     }
-
-    
-	
 
 }
 
