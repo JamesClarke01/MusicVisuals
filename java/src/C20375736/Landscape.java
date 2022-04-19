@@ -12,13 +12,13 @@ public class Landscape
 
     PApplet pa;
     
-    final int TREEAMOUNT = 20; //will be made a dynamic value later
+    final int TREEAMOUNT = 20; 
 	Cloud cloud;	    
     Tree treeArray[];
+
     public Landscape(PApplet pa)
     {
         this.pa = pa;
-
         initTreeArray(TREEAMOUNT);
         cloud = new Cloud(pa);	
     }
@@ -27,9 +27,9 @@ public class Landscape
     {
         pa.pushMatrix();
 
-        pa.translate(pa.width/2, pa.height); //translate to ground level
+        pa.translate(pa.width/2, pa.height); //translate to bottom
 
-        drawBackground();
+        drawBackground();  //draw sky and ground
 
         drawTrees(ambiBuffer);
 
@@ -56,13 +56,13 @@ public class Landscape
             singleTreeSum = 0;
             singleTreeAverage = 0;
 
-            for(int j = 0; j< increment; j++)
+            //getting average of audio buffer
+            for(int j = 0; j< increment; j++)  
             {
                 singleTreeSum += ambiBuffer.get(k);
 
                 k++;
             }
-
             singleTreeAverage = singleTreeSum/TREEAMOUNT;
 
             //this line needs some tweaking
@@ -72,8 +72,6 @@ public class Landscape
         for(int i = 0; i < treeArray.length; i++)
         {
             treeArray[i].render();
-            //treeArray[i].render(lerpedBuffer[i]);
-            //System.out.println(lerpedBuffer[i]);
         }
 
         pa.popMatrix();

@@ -64,9 +64,9 @@ public class Cloud
 			yoff += 0.4;
 		}
 		pa.pushMatrix();
+		
 		//shapes and stuff go here
-		pa.translate(-(pa.width/2),0);
-		pa.translate(leftMax,-pa.height - 150,0);//Sets the postition of the cloud
+		pa.translate(-(pa.width/2) + leftMax,-pa.height - 150,0);//Sets the postition of the cloud
 		
 		pa.rotateX(pa.PI * 1.7f);
 		
