@@ -66,7 +66,8 @@ public class Landscape
             //System.out.println(lerpedBuffer[i]);
         }
 		cloud.render(bassModifier);
-        pa.popMatrix();
+        
+        pa.popMatrix();  //restore matrix to default
     }
 
 
