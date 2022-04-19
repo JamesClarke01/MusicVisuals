@@ -26,7 +26,7 @@ public class Landscape
     
 
 
-    public void render(AudioBuffer ambiBuffer)
+    public void render(AudioBuffer ambiBuffer, float bassModifier)
     {
         pa.pushMatrix();
         drawBackground();
@@ -65,7 +65,7 @@ public class Landscape
             //treeArray[i].render(lerpedBuffer[i]);
             //System.out.println(lerpedBuffer[i]);
         }
-		cloud.render();
+		cloud.render(bassModifier);
         pa.popMatrix();
     }
 

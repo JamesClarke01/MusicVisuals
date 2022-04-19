@@ -32,14 +32,16 @@ public class Visualisation extends PApplet{
     AudioPlayer bassPlayer;
 	AudioBuffer bassBuffer;
     
+
     float musicModifier;  //value from 0-100
     
 
     //for mode switch statemnet
     int mode = 0;
 
-    final int GAIN_MIN  = -20;
-    final int GAIN_MAX = 5;
+    final int MUSICSPLIT = 50;  //0-100, used for determining when bass caps and drums start
+
+    
 
     public void keyPressed() {
         if (key == '1')  //mouse mode
@@ -104,22 +106,47 @@ public class Visualisation extends PApplet{
         }
     }
 
-    public void setStemsGain(float x)
+    public float drumModifier(float modifier)
     {
+        float drumModifier;
+
+        if(modifier < MUSICSPLIT)  //drums are muted
+        {
+            drumModifier = 0;
+        }
+        else  //drums will dynamically increase
+        {
+            drumModifier = map(modifier, MUSICSPLIT, 100, 0, 100);
+        }
+
+        return drumModifier;
+    }
+
+    public float bassModifier(float modifier)
+    {
+        float bassModifier;
+
+        if(modifier < MUSICSPLIT)  //bass will dynamically increase
+        {
+            bassModifier = map(modifier, 0, MUSICSPLIT, 0, 100);;
+        }
+        else  //bass is at max volume
+        {
+            bassModifier = 100;
+        }
+
+        return bassModifier;
+    }
+
+    public void setStemsGain(float x)
+    {   
+        final int GAIN_MIN  = -20;
+        final int GAIN_MAX = 5;
+
         float drumGain, bassGain;
 
-        final int DRUMSTART = 50;
-
-        if(x <= DRUMSTART)  //bass will dynamically increase and drums are muted
-        {
-            bassGain = map(x, 0, DRUMSTART, GAIN_MIN, GAIN_MAX);
-            drumGain = GAIN_MIN; 
-        }
-        else  //bass is at max volume and drums will dynamically increase
-        {
-            bassGain = GAIN_MAX;
-            drumGain = map(x, DRUMSTART + 1, 100, GAIN_MIN, GAIN_MAX);
-        }
+        drumGain = map(drumModifier(x), 0, 100, GAIN_MIN, GAIN_MAX);
+        bassGain = map(bassModifier(x), 0, 100, GAIN_MIN, GAIN_MAX);
 
         drumPlayer.shiftGain(drumPlayer.getGain(),drumGain,200); 
         bassPlayer.shiftGain(bassPlayer.getGain(),bassGain,200); 
@@ -185,7 +212,7 @@ public class Visualisation extends PApplet{
 
         
         
-        landscape.render(ambiBuffer);
+        landscape.render(ambiBuffer, bassModifier(musicModifier));
         ui.render(musicModifier);
 
         

@@ -20,7 +20,6 @@ public class Cloud
 	{
 		this.pa = pa;
 
-
 		hPos = pa.height/5;
 		leftMax = -400;
 		rightMax = pa.width + 100;
@@ -49,7 +48,7 @@ public class Cloud
 	}
 	
 
-	public void render()
+	public void render(float modifier)
 	{
 		rolling += 0.01;
 		float yoff = rolling;
@@ -69,17 +68,19 @@ public class Cloud
 
 		pa.translate(leftMax,-pa.height - 150,0);//Sets the postition of the cloud
 		pa.rotateX(pa.PI * 1.7f);
-		pa.fill(100);
+		pa.fill(76, 77, 75, pa.map(modifier, 0, 100, 0, 255));
+		pa.stroke(0,0,0, pa.map(modifier, 0, 100, 0, 255));
 		for(int i = 0; i < yCount-1; i++)
 		{
 			pa.beginShape(pa.TRIANGLE_STRIP);
 			for(int j = 0; j < xCount; j++)
 			{
-				pa.vertex(xGap * j,hPos + (yGap * i),heights[j][i]);
-				pa.vertex(xGap * j,hPos + (yGap * (i+1)),heights[j][i+1]);
+				pa.vertex(xGap * j, hPos + (yGap * i), heights[j][i]);
+				pa.vertex(xGap * j, hPos + (yGap * (i+1)), heights[j][i+1]);
 			}
 			pa.endShape();
 		}
+		pa.noStroke();
 
 		pa.popMatrix();
 	}
