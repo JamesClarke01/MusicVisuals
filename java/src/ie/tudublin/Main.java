@@ -7,8 +7,6 @@ import C20375736.Visualisation;
 
 public class Main
 {	
-
-	
 	
 	public void startVisualisation()
 	{

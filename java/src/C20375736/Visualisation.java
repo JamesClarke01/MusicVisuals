@@ -175,8 +175,11 @@ public class Visualisation extends PApplet{
         landscape.render(ambiBuffer);
 
         rectMode(CORNER);
+        fill(242, 154, 148);
+        rect(width - 20, height/2 - 50, 20, 50);
+
         fill(235, 52, 64);
-        rect(width/2, height/2 - map(musicModifier, 0, 100, 50, 0), 20, -map(musicModifier, 0, 100, 50, 0));  //pos x, pos y, width, height
+        rect(width - 20, height/2 - map(musicModifier, 0, 100, 0, 50), 20, map(musicModifier, 0, 100, 0, 50));  //pos x, pos y, width, height
     }
 
 
