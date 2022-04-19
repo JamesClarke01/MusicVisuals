@@ -80,22 +80,26 @@ public class Visualisation extends PApplet{
         landscape = new Landscape(this);
 
         //eeg setup
-        try
-        {
-            openComport();
-            System.out.println("Comport opened");
-        }
-        catch (Exception e)
-        {
-            System.out.println("Failed to open comport");
-        }
+        
+        openComport();
+        
+       
     }
 
     public void openComport()
     {
-        comPort = SerialPort.getCommPorts()[2];  
-        
-        comPort.openPort();
+        try
+        {
+            comPort = SerialPort.getCommPorts()[2];  
+            
+            comPort.openPort();
+
+            System.out.println("Comport opened");
+        }
+        catch (Exception e)
+        {
+            System.out.println("Failed to open comport!");
+        }
     }
 
     public void setStemsGain(float x)
@@ -148,7 +152,9 @@ public class Visualisation extends PApplet{
                         {
                             System.out.println("Sig: "+ MindFlexReader.signalQuality + " Att: " + MindFlexReader.attention); 
                             
-                            setStemsGain(MindFlexReader.attention);
+                            musicModifier = MindFlexReader.attention;
+
+                            setStemsGain(musicModifier);
             
                         }
                     }
@@ -158,6 +164,11 @@ public class Visualisation extends PApplet{
                 {
                     System.out.println("No Signal!");
                     openComport();
+                    try {
+                        Thread.sleep(1500);
+                    } catch(InterruptedException interupException) {
+                        System.out.println("Got interrupted!");
+                    }
                 }
 
                 break;
