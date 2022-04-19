@@ -72,6 +72,11 @@ public class Visualisation extends PApplet{
         ambiPlayer = minim.loadFile("ambiTestTrack.mp3", 1024);
         drumPlayer = minim.loadFile("drumsTestTrack.mp3", 1024);
         bassPlayer = minim.loadFile("bassTestTrack.mp3", 1024);
+        
+        // ambiPlayer = minim.loadFile("mkmsAmbiAud.mp3", 1024);
+        // drumPlayer = minim.loadFile("mkmsDrumsAud.mp3", 1024);
+        // bassPlayer = minim.loadFile("mkmsBassAud.mp3", 1024);
+
         ambiPlayer.play();
 		drumPlayer.play();
         bassPlayer.play();

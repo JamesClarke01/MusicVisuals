@@ -23,7 +23,6 @@ public class Forest
         drawTrees(ambiBuffer);
     }
 
-
     public void initTreeArray(int treeAmount)  //call this in constructor
     {  //calculates tree positions and populates the treeArray with tree objects
 
@@ -72,8 +71,15 @@ public class Forest
             }
             singleTreeAverage = singleTreeSum/TREEAMOUNT;
 
-            //this line needs some tweaking
-            treeArray[i].setSphereRadius(pa.lerp(treeArray[i].getSphereRadius(), pa.map(singleTreeAverage, -1, 1, 0, 50) ,  0.1f));
+
+            float offset = pa.map(singleTreeAverage, -0.1f, 0.1f, -20, 20);
+
+            
+            if(Math.abs(offset - treeArray[i].getOffset()) < 10) //eliminate shaking
+            {
+                treeArray[i].setOffset(pa.lerp(treeArray[i].getOffset(), offset,  0.1f));
+            }
+            
         }
 
         for(int i = 0; i < treeArray.length; i++)
