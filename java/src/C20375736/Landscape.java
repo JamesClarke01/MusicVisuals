@@ -1,21 +1,14 @@
 package C20375736;
 
-
 import processing.core.PApplet;
 
-
-//audio stuff imports
 import ddf.minim.AudioBuffer;
-//import ddf.minim.AudioPlayer;
-//import ddf.minim.Minim;
+
 
 public class Landscape
 {
-    //audio variables
-    //float[] lerpedBuffer;
-    float smoothedAmplitude = 0;
 
-    //end audio variables
+    float smoothedAmplitude = 0;
 
     PApplet pa;
     
@@ -29,24 +22,20 @@ public class Landscape
         initTreeArray(TREEAMOUNT);
 		initCloud();
 
-        //lerpedBuffer = new float[TREEAMOUNT];  //initialise lerped buffer to amount of trees
     }
     
 
 
     public void render(AudioBuffer ambiBuffer)
     {
+        pa.pushMatrix();
         drawBackground();
 
         pa.translate(-(pa.width/2),0);  //set the current drawing pos to the far left of the screen
-            
-        //float average = 0;
-        //float sum = 0;
 
         float singleTreeSum;
         float singleTreeAverage;
         
-
         int increment = (int)(ambiBuffer.size() / TREEAMOUNT);  //potential rounding error?
         
         int k=0;
@@ -65,8 +54,6 @@ public class Landscape
 
             singleTreeAverage = singleTreeSum/TREEAMOUNT;
 
-            //System.out.println(singleTreeAverage);
-
             //this line needs some tweaking
             treeArray[i].setSphereRadius(pa.lerp(treeArray[i].getSphereRadius(), pa.map(singleTreeAverage, -1, 1, 0, 50) ,  0.1f));
         }
@@ -79,6 +66,7 @@ public class Landscape
             //System.out.println(lerpedBuffer[i]);
         }
 		cloud.render();
+        pa.popMatrix();
     }
 
 
@@ -87,8 +75,8 @@ public class Landscape
     {
         pa.background(28, 221, 255);
         
-        //pa.translate(pa.width/2, (float)(pa.height * 0.75));  //translate to ground level
-        pa.translate(pa.width/2, pa.height);
+        //pa.translate(pa.width/2, (float)(pa.height * 0.75));  
+        pa.translate(pa.width/2, pa.height); //translate to ground level
         pa.fill(56, 232, 53);  //ground colour
         
         pa.box(pa.width*2, 1, 750); //draws ground (hard coded values need to be removed)

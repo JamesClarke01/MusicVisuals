@@ -32,6 +32,7 @@ public class Visualisation extends PApplet{
 	AudioBuffer bassBuffer;
     
     float musicModifier;  //value from 0-100
+    
 
     //for mode switch statemnet
     int mode = 0;
@@ -55,10 +56,13 @@ public class Visualisation extends PApplet{
     public void settings()
     {
         size(1024, 500, P3D);
+        
     }
 
     public void setup()
     {
+        colorMode(RGB);
+
         //audio stuff
         minim = new Minim(this);
 
@@ -166,7 +170,13 @@ public class Visualisation extends PApplet{
             }
         }
 
+        
+
         landscape.render(ambiBuffer);
+
+        rectMode(CORNER);
+        fill(235, 52, 64);
+        rect(width/2, height/2 - map(musicModifier, 0, 100, 50, 0), 20, -map(musicModifier, 0, 100, 50, 0));  //pos x, pos y, width, height
     }
 
 
