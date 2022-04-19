@@ -10,16 +10,17 @@ import processing.core.PApplet;
 import ddf.minim.AudioBuffer;
 import ddf.minim.AudioPlayer;
 import ddf.minim.Minim;
-import C20375736.MindFlexReader;
+//import C20375736.MindFlexReader;
 
 public class Visualisation extends PApplet{
 
     //eeg setup
     SerialPort comPort;
 
+    //visual classes
     Landscape landscape;
-
-    //float drumGain;
+    UI ui;
+    
    
 
     //audio stuff variables
@@ -76,8 +77,9 @@ public class Visualisation extends PApplet{
         drumBuffer = drumPlayer.mix;  //mix means mix right and left stereo
 		bassBuffer = bassPlayer.mix;  //mix means mix right and left stereo
 
-        //create landscape
+        //initialise visual classes
         landscape = new Landscape(this);
+        ui = new UI(this);
 
         //eeg setup
         
@@ -182,15 +184,11 @@ public class Visualisation extends PApplet{
         }
 
         
-
+        
         landscape.render(ambiBuffer);
+        ui.render(musicModifier);
 
-        rectMode(CORNER);
-        fill(242, 154, 148);
-        rect(width - 20, height/2 - 50, 20, 50);
-
-        fill(235, 52, 64);
-        rect(width - 20, height/2 - map(musicModifier, 0, 100, 0, 50), 20, map(musicModifier, 0, 100, 0, 50));  //pos x, pos y, width, height
+        
     }
 
 
