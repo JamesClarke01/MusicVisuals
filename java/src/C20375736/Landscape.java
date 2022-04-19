@@ -20,22 +20,33 @@ public class Landscape
         this.pa = pa;
 
         initTreeArray(TREEAMOUNT);
-		initCloud();
-
+        cloud = new Cloud(pa);	
     }
     
-
-
     public void render(AudioBuffer ambiBuffer, float bassModifier)
     {
         pa.pushMatrix();
+
+        pa.translate(pa.width/2, pa.height); //translate to ground level
+
         drawBackground();
 
-        pa.translate(-(pa.width/2),0);  //set the current drawing pos to the far left of the screen
+        drawTrees(ambiBuffer);
 
+		cloud.render(bassModifier);
+        
+        pa.popMatrix();  //restore matrix to default
+    }
+
+    public void drawTrees(AudioBuffer ambiBuffer)
+    {
         float singleTreeSum;
         float singleTreeAverage;
         
+        pa.pushMatrix();
+
+        pa.translate(-(pa.width/2),0);  //set the current drawing pos to the far left of the screen
+
         int increment = (int)(ambiBuffer.size() / TREEAMOUNT);  //potential rounding error?
         
         int k=0;
@@ -57,7 +68,6 @@ public class Landscape
             //this line needs some tweaking
             treeArray[i].setSphereRadius(pa.lerp(treeArray[i].getSphereRadius(), pa.map(singleTreeAverage, -1, 1, 0, 50) ,  0.1f));
         }
-        
 
         for(int i = 0; i < treeArray.length; i++)
         {
@@ -65,19 +75,15 @@ public class Landscape
             //treeArray[i].render(lerpedBuffer[i]);
             //System.out.println(lerpedBuffer[i]);
         }
-		cloud.render(bassModifier);
-        
-        pa.popMatrix();  //restore matrix to default
-    }
 
+        pa.popMatrix();
+    }
 
 
     public void drawBackground()
     {
         pa.background(28, 221, 255);
         
-        //pa.translate(pa.width/2, (float)(pa.height * 0.75));  
-        pa.translate(pa.width/2, pa.height); //translate to ground level
         pa.fill(56, 232, 53);  //ground colour
         
         pa.box(pa.width*2, 1, 750); //draws ground (hard coded values need to be removed)
@@ -103,31 +109,6 @@ public class Landscape
         }	
     }
 	
-	public void initCloud()
-	{
-		cloud = new Cloud(pa) ;	
-	}
 
 }
 
-// // Calculate sum and average of the samples
-//         // Also lerp each element of buffer;
-//         for(int i = 0 ; i < ambiBuffer.size() ; i ++)
-//         {   
-//             singleTreeSum = 0;
-//             singleTreeAverage = 0;
-            
-//             for(int j = 0; j< TREEAMOUNT;j++)
-//             {
-//                 ambiBuffer[i] 
-//             }
-            
-            
-//             //sum += pa.abs(ambiBuffer.get(i));
-
-
-//             //lerpedBuffer[i] = pa.lerp(lerpedBuffer[i], ambiBuffer.get(i), 0.05f);
-//         }
-//         // average= sum / (float) ambiBuffer.size();
-
-//         // smoothedAmplitude = pa.lerp(smoothedAmplitude, average, 0.1f);
