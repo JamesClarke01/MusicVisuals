@@ -217,7 +217,7 @@ public class Visualisation extends PApplet{
 
         
         
-        landscape.render(ambiBuffer, bassModifier(musicModifier));
+        landscape.render(ambiBuffer,bassBuffer, bassModifier(musicModifier));
         ui.render(musicModifier);
 
         

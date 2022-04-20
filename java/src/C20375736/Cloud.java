@@ -1,7 +1,7 @@
 package C20375736;
 
 import processing.core.PApplet;
-
+import ddf.minim.AudioBuffer;
 //chance of meatballs?
 
 public class Cloud
@@ -48,7 +48,7 @@ public class Cloud
 	}
 	
 
-	public void render(float modifier)
+	public void render(AudioBuffer bassBuffer,float modifier)
 	{
 		rolling += 0.01;
 		float yoff = rolling;
@@ -60,7 +60,7 @@ public class Cloud
 			for(int j = 0; j < xCount; j++)
 			{
 		
-				heights[j][i] = pa.map(pa.noise(xoff,yoff),0,1,-50,50);
+				heights[j][i] = pa.map(pa.noise(xoff,yoff),0,1,-50,50) * pa.map(bassBuffer.level(),0,0.2f,1,2.5f);
 				xoff += 0.4;
 			}
 			yoff += 0.4;
@@ -84,6 +84,7 @@ public class Cloud
 				pa.vertex(xGap * j, hPos + (yGap * (i+1)), heights[j][i+1]);
 			}
 			pa.endShape();
+			System.out.println(bassBuffer.level());
 		}
 		pa.noStroke();
 

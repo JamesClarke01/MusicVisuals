@@ -24,7 +24,7 @@ public class Landscape
         forest = new Forest(pa);
     }
     
-    public void render(AudioBuffer ambiBuffer, float bassModifier)
+    public void render(AudioBuffer ambiBuffer, AudioBuffer bassBuffer,float bassModifier)
     {
         pa.pushMatrix();
 
@@ -34,7 +34,7 @@ public class Landscape
 
         forest.render(ambiBuffer);
 
-		cloud.render(bassModifier);
+		cloud.render(bassBuffer,bassModifier);
         
         pa.popMatrix();  //restore matrix to default
     }
