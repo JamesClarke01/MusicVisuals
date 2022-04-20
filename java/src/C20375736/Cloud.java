@@ -20,7 +20,7 @@ public class Cloud
 	{
 		this.pa = pa;
 
-		hPos = pa.height/5;
+		hPos = (float)-2.45 * pa.height/5;
 		leftMax = -400;
 		rightMax = pa.width + 100;
 		cent = pa.width/2;
@@ -52,6 +52,8 @@ public class Cloud
 	{
 		rolling += 0.01;
 		float yoff = rolling;
+		//clouds will now slide in to view based on the modifier
+		hPos = pa.map(modifier,0,100,(float)-2.45 * pa.height/5,pa.height/6);
 		for(int i = 0; i < yCount; i++)
 		{
 			float xoff = 0;
@@ -72,7 +74,7 @@ public class Cloud
 		
 		pa.fill(76, 77, 75, pa.map(modifier, 0, 100, 0, 255));  //set cloud colour/opacity
 		pa.stroke(0,0,0, pa.map(modifier, 0, 100, 0, 255));  //set outline colour
-		
+			
 		for(int i = 0; i < yCount-1; i++)
 		{
 			pa.beginShape(pa.TRIANGLE_STRIP);
