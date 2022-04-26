@@ -74,7 +74,7 @@ public class Forest
 
             float offset = pa.map(singleTreeAverage, -0.1f, 0.1f, -20, 20);
 
-            
+            //pa.stroke(0);
             if(Math.abs(offset - treeArray[i].getOffset()) < 10) //eliminate shaking
             {
                 treeArray[i].setOffset(pa.lerp(treeArray[i].getOffset(), offset,  0.1f));
