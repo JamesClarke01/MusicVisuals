@@ -88,7 +88,7 @@ public class Forest
         }
         for(int i = 0; i < treeArray.length; i++)
         {
-            treeArray[i].newRender(treeArray[i].branches);
+            treeArray[i].newRender((int)treeArray[i].branches);
         }
 
         pa.popMatrix();
