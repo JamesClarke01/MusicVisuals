@@ -85,32 +85,4 @@ public class Tree{
 
         pa.popMatrix();
 	}
-
-    public void render()
-    {
-        
-
-        pa.pushMatrix();
-        pa.translate(xPos,yPos,zPos);  //go to tree position
-
-    
-       // pa.noStroke();  //comment for outlines
-        
-        //for drawing head
-        pa.translate(0, -trunkLength);
-
-		pa.pushMatrix();
-        pa.translate(offset, 0);
-        pa.fill(21, 161, 26);  //tree colour
-        pa.sphereDetail(5);
-		pa.sphere(sphereRadius);
-		pa.popMatrix();
-
-        //for drawing trunk
-        pa.translate(0, trunkLength/2); 
-        pa.fill(51, 5, 5);  //trunk colour
-        pa.box(trunkWidth, trunkLength, trunkWidth);
-
-        pa.popMatrix();
-    }
 }
