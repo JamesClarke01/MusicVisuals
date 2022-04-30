@@ -9,7 +9,7 @@ public class Forest
     
     PApplet pa;
     Tree treeArray[];
-    final int TREEAMOUNT = 20; 
+    final int TREEAMOUNT = 5; 
 
     public Forest(PApplet pa)
     {
@@ -34,10 +34,15 @@ public class Forest
         Tree newTree;
         float treeSize;
 
+		float branchMin= 3;float branchMax = 6;
+
+		float branches;
+
         for(int i = 0; i < treeAmount; i++)
         {
             treeSize = pa.random(100, 150);
-            newTree = new Tree(pa, treeSize, treePosX, 0, 0);  //tree x and y left blank for now
+			branches = pa.random(branchMin,branchMax);
+            newTree = new Tree(pa, treeSize, treePosX, 0, 0,branches);  //tree x and y left blank for now
             treeArray[i] = newTree; 
             treePosX += increment;
         }	
@@ -81,10 +86,9 @@ public class Forest
             }
             
         }
-
         for(int i = 0; i < treeArray.length; i++)
         {
-            treeArray[i].render();
+            treeArray[i].newRender(treeArray[i].branches);
         }
 
         pa.popMatrix();

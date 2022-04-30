@@ -14,7 +14,6 @@ public class Landscape
     
 	Cloud cloud;
     Forest forest;	    
-    
 
     public Landscape(PApplet pa)
     {
@@ -36,6 +35,7 @@ public class Landscape
 
 		cloud.render(bassBuffer,bassModifier);
         
+
         pa.popMatrix();  //restore matrix to default
     }
 
