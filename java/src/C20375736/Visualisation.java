@@ -43,7 +43,8 @@ public class Visualisation extends PApplet{
 
     
 
-    public void keyPressed() {
+    public void keyPressed() 
+	{
         if (key == '1')  //mouse mode
         {
             System.out.println("Switching to mouse mode");
@@ -217,7 +218,7 @@ public class Visualisation extends PApplet{
 
         
         
-        landscape.render(ambiBuffer,bassBuffer, bassModifier(musicModifier));
+        landscape.render(ambiBuffer,bassBuffer, bassModifier(musicModifier),drumBuffer);
         ui.render(musicModifier);
 
         

@@ -14,6 +14,7 @@ public class Landscape
     
 	Cloud cloud;
     Forest forest;	    
+	Volley volley;
 
     public Landscape(PApplet pa)
     {
@@ -21,9 +22,11 @@ public class Landscape
         
         cloud = new Cloud(pa);
         forest = new Forest(pa);
+		volley  = new Volley(pa);
     }
     
-    public void render(AudioBuffer ambiBuffer, AudioBuffer bassBuffer,float bassModifier)
+    public void render(AudioBuffer ambiBuffer, AudioBuffer bassBuffer,
+						float bassModifier, AudioBuffer drumBuffer)
     {
         pa.pushMatrix();
 
@@ -32,8 +35,11 @@ public class Landscape
         drawBackground();  //draw sky and ground
 
         forest.render(ambiBuffer);
+		
+		volley.drawBolts(drumBuffer);
 
 		cloud.render(bassBuffer,bassModifier);
+
         
 
         pa.popMatrix();  //restore matrix to default

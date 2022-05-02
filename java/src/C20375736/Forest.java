@@ -9,7 +9,7 @@ public class Forest
     
     PApplet pa;
     Tree treeArray[];
-    final int TREEAMOUNT = 5; 
+    final int TREEAMOUNT = 7; 
 
     public Forest(PApplet pa)
     {

@@ -84,7 +84,6 @@ public class Cloud
 				pa.vertex(xGap * j, hPos + (yGap * (i+1)), heights[j][i+1]);
 			}
 			pa.endShape();
-			System.out.println(bassBuffer.level());
 		}
 		pa.noStroke();
 

@@ -21,7 +21,7 @@ public class Bolt
 	public void charge()
 	{
 		pa.pushMatrix();
-		pa.translate(xPos,yPos,zPos);	
+		pa.translate(xPos + pa.mouseX,yPos + pa.mouseY,zPos);	
 	}
 	
 	public void discharge()
