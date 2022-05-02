@@ -6,7 +6,6 @@ public class Bolt
 {
 	PApplet pa;
 
-
 	float xPos, yPos, zPos;
 
 
@@ -18,22 +17,12 @@ public class Bolt
 		this.zPos = zPos;
 	}
 
-	public void charge()
-	{
-		pa.pushMatrix();
-		pa.translate(xPos + pa.mouseX,yPos + pa.mouseY,zPos);	
-	}
 	
-	public void discharge()
-	{
-		pa.popMatrix();
-	}
-
 
 	public void strike(int depth, float len)
 	{
-		
-		pa.fill(229,254,69);
+		//pa.fill(229,254,69);
+		pa.fill(0);
 		
 		for(int i = 0; i < depth; i++)
 		{
@@ -49,8 +38,5 @@ public class Bolt
 
 			pa.popMatrix();
 		}
-	
 	}
-
-
 }

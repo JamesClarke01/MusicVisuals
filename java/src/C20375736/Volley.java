@@ -3,8 +3,7 @@ package C20375736;
 import processing.core.PApplet;
 import ddf.minim.AudioBuffer;
 public class Volley
-{
-	
+{	
 	PApplet pa;
 	Bolt boltArray[];
 
@@ -31,17 +30,15 @@ public class Volley
 			newBolt = new Bolt(pa,boltX,0,0);
 			boltArray[i] = newBolt;
 			boltX += gap;
+			System.out.println("INITIALIZED:" + i);
 		}
-
 	}
 
 	public void drawBolts(AudioBuffer drumBuffer)
 	{
 		for(int i = 0; i < BOLTAMOUNT; i++)
 		{
-			System.out.println("\t" + drumBuffer.level());
 			boltArray[i].strike((int)pa.map(drumBuffer.level(),0,10,0,(float)0.1),30);
 		}
 	}
-
 }

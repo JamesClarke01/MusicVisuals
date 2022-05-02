@@ -54,6 +54,7 @@ public class Tree{
 	public void newRender(int n) //n is number of branches!
 	{	
         pa.pushMatrix();
+
         pa.translate(xPos,yPos,zPos);  //go to tree position
     
 		// pa.noStroke();  //comment for outlines
@@ -63,7 +64,6 @@ public class Tree{
 
 		pa.pushMatrix();
         pa.translate(offset, 0);
-		
         pa.sphereDetail(5);
 		pa.stroke(0);
 		float len = 100;
@@ -73,7 +73,7 @@ public class Tree{
 			pa.pushMatrix();
 			
 			pa.rotateZ(2*pa.PI*i/n);
-			
+			if(i != 0) pa.rotateZ(offset/15);	
 			pa.translate(0,trunkLength/2,0);
 			
 			pa.fill(51, 5, 5);  //trunk colour
@@ -85,7 +85,6 @@ public class Tree{
 		}
 		pa.popMatrix();
 
-        //for drawing trunk
 
         pa.popMatrix();
 	}	
