@@ -25,8 +25,7 @@ public class Landscape
 		volley  = new Volley(pa);
     }
     
-    public void render(AudioBuffer ambiBuffer, AudioBuffer bassBuffer,
-						float bassModifier, AudioBuffer drumBuffer)
+    public void render(AudioBuffer ambiBuffer, AudioBuffer bassBuffer, AudioBuffer drumBuffer, float bassModifier )
     {
         pa.pushMatrix();
 
@@ -48,14 +47,14 @@ public class Landscape
     public void drawBackground(float bassModifier)
     {
         float BACK_MODIFIER = pa.map(bassModifier, 0, 100, 255, 80);
-        float GROUND_MODIFIER = pa.map(bassModifier, 0, 100, 255, 130);
+        float GROUND_MODIFIER = pa.map(bassModifier, 0, 100, 225, 130);
 
 
         pa.colorMode(pa.HSB);
         
         pa.background(135, BACK_MODIFIER, BACK_MODIFIER);  //rgb: 28, 221, 255
         
-        pa.fill(90, GROUND_MODIFIER, GROUND_MODIFIER);  //ground colour, rgb:  56, 232, 53
+        pa.fill(80, GROUND_MODIFIER, GROUND_MODIFIER);  //ground colour, rgb:  56, 232, 53
         
         
         pa.box(pa.width*2, 1, 750); //draws ground (hard coded values need to be removed)

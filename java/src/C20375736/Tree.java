@@ -53,13 +53,17 @@ public class Tree{
     
 	public void newRender(int n, float bassModifier) //n is number of branches!
 	{	
-        float LEAF_MODIFIER = pa.map(bassModifier, 0, 100, 255, 130);
+        float LEAF_MODIFIER = pa.map(bassModifier, 0, 100, 225, 130);
 
         pa.colorMode(pa.HSB);
 
         pa.pushMatrix();
         pa.translate(xPos,yPos,zPos);  //go to tree position
-        
+
+    
+       // pa.noStroke();  //comment for outlines
+        pa.stroke(94, 54, 30);
+        //pa.stroke(150, 150, 150);
         //for drawing head
         pa.translate(0, -trunkLength);
 

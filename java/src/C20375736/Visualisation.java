@@ -34,7 +34,7 @@ public class Visualisation extends PApplet{
     
 
     float musicModifier;  //value from 0-100
-    
+    int signal;
 
     //for mode switch statemnet
     int mode = 0;
@@ -55,6 +55,9 @@ public class Visualisation extends PApplet{
             System.out.println("Switching to eeg mode");
             mode = 2;
         }
+
+        signal = 100;
+        
     }
     
     public void settings()
@@ -78,9 +81,9 @@ public class Visualisation extends PApplet{
         // drumPlayer = minim.loadFile("mkmsDrumsAud.mp3", 1024);
         // bassPlayer = minim.loadFile("mkmsBassAud.mp3", 1024);
 
-        ambiPlayer.play();
-		drumPlayer.play();
-        bassPlayer.play();
+        ambiPlayer.loop();
+		drumPlayer.loop();
+        bassPlayer.loop();
         ambiBuffer = ambiPlayer.mix;  //mix means mix right and left stereo
         drumBuffer = drumPlayer.mix;  //mix means mix right and left stereo
 		bassBuffer = bassPlayer.mix;  //mix means mix right and left stereo
@@ -90,7 +93,7 @@ public class Visualisation extends PApplet{
         ui = new UI(this);
 
         //eeg setup
-        
+        signal = 100;
         openComport();
         
        
@@ -165,6 +168,7 @@ public class Visualisation extends PApplet{
         {
             case 1:  //mouse mode
             {
+                signal = 100;
                 musicModifier = map(mouseY, height, 0, 0, 100);
                 setStemsGain(musicModifier);
                 break;  //break must be here
@@ -188,6 +192,7 @@ public class Visualisation extends PApplet{
                             System.out.println("Sig: "+ MindFlexReader.signalQuality + " Att: " + MindFlexReader.attention); 
                             
                             musicModifier = MindFlexReader.attention;
+                            signal = MindFlexReader.signalQuality;
 
                             setStemsGain(musicModifier);
             
@@ -218,8 +223,9 @@ public class Visualisation extends PApplet{
 
         
         
-        landscape.render(ambiBuffer,bassBuffer, bassModifier(musicModifier),drumBuffer);
-        ui.render(musicModifier);
+        landscape.render(ambiBuffer,bassBuffer, drumBuffer, bassModifier(musicModifier));
+
+        ui.render(musicModifier, signal);
 
         
     }
