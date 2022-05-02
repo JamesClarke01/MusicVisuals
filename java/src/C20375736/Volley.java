@@ -39,7 +39,7 @@ public class Volley
 	{
 		for(int i = 0; i < BOLTAMOUNT; i++)
 		{
-			System.out.println("\t" + drumBuffer.level());
+			//System.out.println("\t" + drumBuffer.level());
 			boltArray[i].strike((int)pa.map(drumBuffer.level(),0,10,0,(float)0.1),30);
 		}
 	}

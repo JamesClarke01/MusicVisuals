@@ -32,27 +32,35 @@ public class Landscape
 
         pa.translate(pa.width/2, pa.height); //translate to bottom
 
-        drawBackground();  //draw sky and ground
+        drawBackground(bassModifier);  //draw sky and ground
 
-        forest.render(ambiBuffer);
+        forest.render(ambiBuffer, bassModifier);
 		
 		volley.drawBolts(drumBuffer);
 
 		cloud.render(bassBuffer,bassModifier);
 
         
-
         pa.popMatrix();  //restore matrix to default
     }
 
     
-    public void drawBackground()
+    public void drawBackground(float bassModifier)
     {
-        pa.background(28, 221, 255);
+        float BACK_MODIFIER = pa.map(bassModifier, 0, 100, 255, 80);
+        float GROUND_MODIFIER = pa.map(bassModifier, 0, 100, 255, 130);
+
+
+        pa.colorMode(pa.HSB);
         
-        pa.fill(56, 232, 53);  //ground colour
+        pa.background(135, BACK_MODIFIER, BACK_MODIFIER);  //rgb: 28, 221, 255
+        
+        pa.fill(90, GROUND_MODIFIER, GROUND_MODIFIER);  //ground colour, rgb:  56, 232, 53
+        
         
         pa.box(pa.width*2, 1, 750); //draws ground (hard coded values need to be removed)
+
+        pa.colorMode(pa.RGB);
     }
 
 }

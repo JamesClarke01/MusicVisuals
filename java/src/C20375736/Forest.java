@@ -18,9 +18,9 @@ public class Forest
         initTreeArray(TREEAMOUNT);
     }
 
-    public void render(AudioBuffer ambiBuffer)
+    public void render(AudioBuffer ambiBuffer, float bassModifier)
     {
-        drawTrees(ambiBuffer);
+        drawTrees(ambiBuffer, bassModifier);
     }
 
     public void initTreeArray(int treeAmount)  //call this in constructor
@@ -49,7 +49,7 @@ public class Forest
     }
 
 
-    public void drawTrees(AudioBuffer ambiBuffer)
+    public void drawTrees(AudioBuffer ambiBuffer, float bassModifier)
     {
         float singleTreeSum;
         float singleTreeAverage;
@@ -88,7 +88,7 @@ public class Forest
         }
         for(int i = 0; i < treeArray.length; i++)
         {
-            treeArray[i].newRender((int)treeArray[i].branches);
+            treeArray[i].newRender((int)treeArray[i].branches, bassModifier);
         }
 
         pa.popMatrix();
