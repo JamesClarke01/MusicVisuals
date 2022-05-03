@@ -191,7 +191,11 @@ public class Visualisation extends PApplet{
                         {
                             System.out.println("Sig: "+ MindFlexReader.signalQuality + " Att: " + MindFlexReader.attention); 
                             
+                            //musicModifier = lerp(musicModifier, MindFlexReader.attention, 0.1f);
                             musicModifier = MindFlexReader.attention;
+
+                            
+                            
                             signal = MindFlexReader.signalQuality;
 
                             setStemsGain(musicModifier);
@@ -224,7 +228,7 @@ public class Visualisation extends PApplet{
         
         
         landscape.render(ambiBuffer,bassBuffer, drumBuffer, musicModifier, bassModifier(musicModifier), drumModifier(musicModifier), signal);
-
+        //ui.render(musicModifier, signal);
        
         
     }

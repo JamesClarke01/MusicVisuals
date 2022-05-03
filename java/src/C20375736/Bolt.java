@@ -25,7 +25,7 @@ public class Bolt
 	public void strike(int depth, float len, float drumModifier)
 	{
 		pa.noStroke();
-		pa.fill(0,255,255, pa.map(drumModifier, 0, 100, 0, 255));  //229,254,69
+		pa.fill(0,255,255, pa.map(drumModifier, 30, 100, 0, 255));  //229,254,69
 		
 
 		pa.rotateY(pa.PI/2);

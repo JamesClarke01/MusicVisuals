@@ -13,10 +13,13 @@ public class UI {
     
     public void render(float modifier, int signal)
     {
+        //System.out.println("ui rendering");
         //draw background rectange
+        pa.colorMode(pa.RGB);
         pa.rectMode(pa.CORNER);
         pa.fill(242, 154, 148);
         pa.rect(pa.width - 20, pa.height/2 - 50, 20, 50);
+
 
         //draw foreground rectange
         pa.fill(235, 52, 64);

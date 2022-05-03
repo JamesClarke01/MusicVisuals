@@ -50,6 +50,7 @@ public class Cloud
 
 	public void render(AudioBuffer bassBuffer,float modifier)
 	{
+		pa.pushMatrix();
 		rolling += 0.01;
 		float yoff = rolling;
 		//clouds will now slide in to view based on the modifier
@@ -87,6 +88,7 @@ public class Cloud
 		}
 		pa.noStroke();
 
+		pa.popMatrix();
 		pa.popMatrix();
 	}
 

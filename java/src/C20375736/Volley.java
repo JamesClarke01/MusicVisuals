@@ -34,11 +34,13 @@ public class Volley
 
 	public void drawBolts(AudioBuffer drumBuffer, float drumModifier)
 	{
+		pa.pushMatrix();
 		for(int i = 0; i < BOLTAMOUNT; i++)
 		{
 			boltArray[i].charge();
 			boltArray[i].strike((int)pa.map(drumBuffer.level(),0,0.1f,0,12) - (int)pa.random(0,6),40, drumModifier);
 			boltArray[i].discharge();
 		}
+		pa.popMatrix();
 	}
 }

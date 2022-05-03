@@ -22,7 +22,9 @@ public class Forest
 
     public void render(AudioBuffer ambiBuffer, float bassModifier)
     {
+        pa.pushMatrix();
         drawTrees(ambiBuffer, bassModifier);
+        pa.popMatrix();
     }
 
     public void initTreeArray(int treeCols, int treeRows)  //call this in constructor
