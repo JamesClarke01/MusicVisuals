@@ -41,7 +41,7 @@ public class Visualisation extends PApplet{
 
     final int MUSICSPLIT = 50;  //0-100, used for determining when bass caps and drums start
 
-    
+    int musicState = 0;
 
     public void keyPressed() 
 	{
@@ -73,9 +73,13 @@ public class Visualisation extends PApplet{
         //audio stuff
         minim = new Minim(this);
 
-        ambiPlayer = minim.loadFile("ambiTestTrack.mp3", 1024);
-        drumPlayer = minim.loadFile("drumsTestTrack.mp3", 1024);
-        bassPlayer = minim.loadFile("bassTestTrack.mp3", 1024);
+        ambiPlayer = minim.loadFile("Low/AmbiLow.mp3", 1024);
+        bassPlayer = minim.loadFile("Low/BassLow.mp3", 1024);
+        drumPlayer = minim.loadFile("Low/DrumLow.mp3", 1024);
+
+        // ambiPlayer = minim.loadFile("ambiTestTrack.mp3", 1024);
+        // drumPlayer = minim.loadFile("drumsTestTrack.mp3", 1024);
+        // bassPlayer = minim.loadFile("bassTestTrack.mp3", 1024);
         
         // ambiPlayer = minim.loadFile("mkmsAmbiAud.mp3", 1024);
         // drumPlayer = minim.loadFile("mkmsDrumsAud.mp3", 1024);
@@ -147,15 +151,95 @@ public class Visualisation extends PApplet{
         return bassModifier;
     }
 
-    public void setStemsGain(float x)
+    public void setStemsGain(float modifier)
     {   
+
         final int GAIN_MIN  = -20;
         final int GAIN_MAX = 5;
 
         float drumGain, bassGain;
 
-        drumGain = map(drumModifier(x), 0, 100, GAIN_MIN, GAIN_MAX);
-        bassGain = map(bassModifier(x), 0, 100, GAIN_MIN, GAIN_MAX);
+        int pastMusicState = musicState;
+
+        //change music
+        if(modifier < 33)
+        {
+            //System.out.println("low");
+            musicState = 0;
+            
+            if(pastMusicState != musicState)  //if changed
+            {
+                ambiPlayer.pause();
+                drumPlayer.pause();
+                bassPlayer.pause();
+
+                System.out.println("change");
+                ambiPlayer = minim.loadFile("Low/AmbiLow.mp3", 1024);
+                bassPlayer = minim.loadFile("Low/BassLow.mp3", 1024);
+                drumPlayer = minim.loadFile("Low/DrumLow.mp3", 1024);
+
+                ambiPlayer.loop();
+                drumPlayer.loop();
+                bassPlayer.loop();
+                ambiBuffer = ambiPlayer.mix;  //mix means mix right and left stereo
+                drumBuffer = drumPlayer.mix;  //mix means mix right and left stereo
+                bassBuffer = bassPlayer.mix;  //mix means mix right and left stereo
+            }
+        }
+        else if(modifier < 66)
+        {
+            //System.out.println("mid");
+            musicState = 1;
+        
+            if(pastMusicState != musicState)  //if changed
+            {
+                ambiPlayer.pause();
+                drumPlayer.pause();
+                bassPlayer.pause();
+
+                System.out.println("change");
+                ambiPlayer = minim.loadFile("Mid/AmbiMid.mp3", 1024);
+                bassPlayer = minim.loadFile("Mid/BassMid.mp3", 1024);
+                drumPlayer = minim.loadFile("Mid/DrumMid.mp3", 1024);
+
+                ambiPlayer.loop();
+                drumPlayer.loop();
+                bassPlayer.loop();
+                ambiBuffer = ambiPlayer.mix;  //mix means mix right and left stereo
+                drumBuffer = drumPlayer.mix;  //mix means mix right and left stereo
+                bassBuffer = bassPlayer.mix;  //mix means mix right and left stereo
+            }
+        }
+        else
+        {
+            //System.out.println("high");
+            musicState = 2;
+
+            if(pastMusicState != musicState)  //if changed
+            {
+                ambiPlayer.pause();
+                drumPlayer.pause();
+                bassPlayer.pause();
+
+                System.out.println("change");
+                ambiPlayer = minim.loadFile("Hard/AmbiHard.mp3", 1024);
+                bassPlayer = minim.loadFile("Hard/BassHard.mp3", 1024);
+                drumPlayer = minim.loadFile("Hard/DrumHard.mp3", 1024);
+
+                ambiPlayer.loop();
+                drumPlayer.loop();
+                bassPlayer.loop();
+                ambiBuffer = ambiPlayer.mix;  //mix means mix right and left stereo
+                drumBuffer = drumPlayer.mix;  //mix means mix right and left stereo
+                bassBuffer = bassPlayer.mix;  //mix means mix right and left stereo
+            }
+            
+        }
+
+        
+
+        drumGain = map(drumModifier(modifier), 0, 100, GAIN_MIN, GAIN_MAX);
+        bassGain = map(bassModifier(modifier), 0, 100, GAIN_MIN, GAIN_MAX);
 
         drumPlayer.shiftGain(drumPlayer.getGain(),drumGain,200); 
         bassPlayer.shiftGain(bassPlayer.getGain(),bassGain,200); 
