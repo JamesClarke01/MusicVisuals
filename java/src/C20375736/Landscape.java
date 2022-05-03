@@ -33,8 +33,7 @@ public class Landscape
         pa.translate(pa.width/2, pa.height); //translate to bottom
 
         drawBackground(bassModifier);  //draw sky and ground
-
-        
+     
         forest.render(ambiBuffer, bassModifier);
 		
         cloud.render(bassBuffer,bassModifier);

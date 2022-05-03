@@ -9,13 +9,15 @@ public class Forest
     
     PApplet pa;
     Tree treeArray[];
-    final int TREEAMOUNT = 7; 
+    final int TREECOLS = 7; 
+	final int TREEROWS = 3;
+	final int TREEAMOUNT = TREECOLS * TREEROWS;
 
     public Forest(PApplet pa)
     {
         this.pa = pa;
 
-        initTreeArray(TREEAMOUNT);
+        initTreeArray(TREECOLS,TREEROWS);
     }
 
     public void render(AudioBuffer ambiBuffer, float bassModifier)
@@ -23,14 +25,18 @@ public class Forest
         drawTrees(ambiBuffer, bassModifier);
     }
 
-    public void initTreeArray(int treeAmount)  //call this in constructor
+    public void initTreeArray(int treeCols, int treeRows)  //call this in constructor
     {  //calculates tree positions and populates the treeArray with tree objects
+
+		int treeAmount = treeRows * treeCols;
 
         treeArray = new Tree[treeAmount]; //initialise array
 
-        float increment = (float)(pa.width/(treeAmount-1)); //treeAmount must be decremented to account for tree at first pos and end pos
-
+        float incrementX = (float)(pa.width/(treeCols-1)); //treeAmount must be decremented to account for tree at first pos and end pos
+		float incrementZ = 100;
+		
         float treePosX = 0;
+		float treePosZ = 0;
         Tree newTree;
         float treeSize;
 
@@ -42,9 +48,14 @@ public class Forest
         {
             treeSize = pa.random(100, 150);
 			branches = pa.random(branchMin,branchMax);
-            newTree = new Tree(pa, treeSize, treePosX, 0, 0,branches);  //tree x and y left blank for now
+            newTree = new Tree(pa, treeSize, treePosX, 0, treePosZ,branches);  //tree x and y left blank for now
             treeArray[i] = newTree; 
-            treePosX += increment;
+            treePosX += incrementX;
+			if(i % treeCols == treeCols-1) 
+			{
+				treePosZ -= incrementZ;
+				treePosX = incrementX/2;
+			}
         }	
     }
 

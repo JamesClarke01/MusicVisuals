@@ -65,7 +65,6 @@ public class Tree{
        // pa.noStroke();  //comment for outlines
         pa.stroke(94, 54, 30);
         //pa.stroke(150, 150, 150);
-        //for drawing head
         pa.translate(0, -trunkLength);
 
 		pa.pushMatrix();
