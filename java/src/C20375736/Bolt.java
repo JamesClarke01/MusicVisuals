@@ -27,6 +27,7 @@ public class Bolt
 		pa.fill(229,254,69);
 		
 
+		pa.rotateY(pa.PI/2);
 		for(int i = 0; i < depth; i++)
 		{
 			pa.pushMatrix();
