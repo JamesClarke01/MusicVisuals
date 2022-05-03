@@ -33,12 +33,12 @@ public class Volley
 		}
 	}
 
-	public void drawBolts(AudioBuffer drumBuffer)
+	public void drawBolts(AudioBuffer drumBuffer, float drumModifier)
 	{
 		for(int i = 0; i < BOLTAMOUNT; i++)
 		{
 			boltArray[i].charge();
-			boltArray[i].strike((int)pa.map(drumBuffer.level(),0,0.1f,0,10),50);
+			boltArray[i].strike((int)pa.map(drumBuffer.level(),0,0.1f,0,10),50, drumModifier);
 			boltArray[i].discharge();
 		}
 	}

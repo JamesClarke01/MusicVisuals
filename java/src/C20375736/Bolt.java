@@ -22,9 +22,10 @@ public class Bolt
 		pa.translate(xPos,yPos,zPos);
 	}
 	
-	public void strike(int depth, float len)
+	public void strike(int depth, float len, float drumModifier)
 	{
-		pa.fill(229,254,69);
+		pa.noStroke();
+		pa.fill(0,255,255, pa.map(drumModifier, 0, 100, 0, 255));  //229,254,69
 		
 
 		pa.rotateY(pa.PI/2);
@@ -38,7 +39,7 @@ public class Bolt
 			pa.translate(0,len,0);
 			pa.box(10,len,10);
 			//recursive call (where the magic happens)
-			if(i == 1) strike(depth-1,len);
+			if(i == 1) strike(depth-1,len, drumModifier);
 
 			pa.popMatrix();
 		}
