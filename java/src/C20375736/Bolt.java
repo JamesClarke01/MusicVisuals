@@ -39,7 +39,7 @@ public class Bolt
 			pa.translate(0,len,0);
 			pa.box(10,len,10);
 			//recursive call (where the magic happens)
-			if(i == 1) strike(depth-1,len, drumModifier);
+			if(i == 1) strike(depth-1,len - 2, drumModifier);
 
 			pa.popMatrix();
 		}
