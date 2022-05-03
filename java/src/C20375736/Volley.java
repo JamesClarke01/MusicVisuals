@@ -7,7 +7,7 @@ public class Volley
 	PApplet pa;
 	Bolt boltArray[];
 
-	final int BOLTAMOUNT = 5;
+	final int BOLTAMOUNT = 6;
 	
 	public Volley(PApplet pa)
 	{
@@ -19,17 +19,16 @@ public class Volley
 	{
 		boltArray = new Bolt[BOLTAMOUNT];
 
-		float gap = pa.width/BOLTAMOUNT-1;
+		float gap = (pa.width + 200)/BOLTAMOUNT;
 
 
 		float boltX = 0;
-		Bolt newBolt;
 
+		Bolt newBolt;
 		for(int i = 0; i < BOLTAMOUNT; i++)
 		{
-			newBolt = new Bolt(pa,boltX,0,0);
+			newBolt = new Bolt(pa,boltX + (gap * i) - pa.width/2,-400,0);
 			boltArray[i] = newBolt;
-			boltX += gap;
 			System.out.println("INITIALIZED:" + i);
 		}
 	}
@@ -38,7 +37,9 @@ public class Volley
 	{
 		for(int i = 0; i < BOLTAMOUNT; i++)
 		{
-			boltArray[i].strike((int)pa.map(drumBuffer.level(),0,10,0,(float)0.1),30);
+			boltArray[i].charge();
+			boltArray[i].strike((int)pa.map(drumBuffer.level(),0,0.1f,0,15),50);
+			boltArray[i].discharge();
 		}
 	}
 }
