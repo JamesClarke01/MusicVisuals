@@ -7,7 +7,6 @@ import ddf.minim.AudioBuffer;
 
 public class Landscape
 {
-
     float smoothedAmplitude = 0;
 
     PApplet pa;
@@ -61,6 +60,5 @@ public class Landscape
 
         pa.colorMode(pa.RGB);
     }
-
 }
 

@@ -58,6 +58,7 @@ public class Tree{
         pa.colorMode(pa.HSB);
 
         pa.pushMatrix();
+
         pa.translate(xPos,yPos,zPos);  //go to tree position
 
     
@@ -69,7 +70,6 @@ public class Tree{
 
 		pa.pushMatrix();
         pa.translate(offset, 0);
-		
         pa.sphereDetail(5);
 		pa.stroke(0);
 
@@ -81,7 +81,7 @@ public class Tree{
 			pa.pushMatrix();
 			
 			pa.rotateZ(2*pa.PI*i/n);
-			
+			if(i != 0) pa.rotateZ(offset/15);	
 			pa.translate(0,trunkLength/2,0);
 			
 			pa.fill(255, pa.map(bassModifier, 0, 100, 255, 125), pa.map(bassModifier, 0, 100, 70, 50));  //trunk colour, rgb: 51, 5, 5
@@ -97,7 +97,6 @@ public class Tree{
 		}
 		pa.popMatrix();
 
-        //for drawing trunk
 
         pa.popMatrix();
 

@@ -6,7 +6,6 @@ public class Bolt
 {
 	PApplet pa;
 
-
 	float xPos, yPos, zPos;
 
 
@@ -19,29 +18,22 @@ public class Bolt
 	}
 
 	public void charge()
-	{
-		pa.pushMatrix();
-		pa.translate(xPos + pa.mouseX,yPos + pa.mouseY,zPos);	
+	{	pa.pushMatrix(); 
+		pa.translate(xPos,yPos,zPos);
 	}
 	
-	public void discharge()
-	{
-		pa.popMatrix();
-	}
-
-
 	public void strike(int depth, float len)
 	{
-		
 		pa.fill(229,254,69);
 		
+
 		for(int i = 0; i < depth; i++)
 		{
 			pa.pushMatrix();
-
 			pa.rotateY(pa.TAU * i/depth);
-			pa.rotateZ(pa.PI/12);
 
+			if(i % 2 == 0)	pa.rotateZ(pa.PI/12);
+			else pa.rotateZ(-pa.PI/12);
 			pa.translate(0,len,0);
 			pa.box(10,len,10);
 			//recursive call (where the magic happens)
@@ -49,8 +41,17 @@ public class Bolt
 
 			pa.popMatrix();
 		}
-	
 	}
-
-
+	public void discharge()
+	{
+		pa.popMatrix();
+	}
+	public void sstrike(int depth, float length)
+	{
+		pa.fill(0);
+		pa.pushMatrix();
+		pa.translate(pa.mouseX,yPos,zPos);
+		pa.box(10);
+		pa.popMatrix();
+	}
 }
