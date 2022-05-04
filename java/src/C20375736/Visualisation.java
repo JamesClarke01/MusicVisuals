@@ -40,7 +40,7 @@ public class Visualisation extends PApplet{
     //for mode switch statemnet
     int mode = 0;
 
-    final int MUSICSPLIT = 50;  //0-100, used for determining when bass caps and drums start
+    final int MUSICSPLIT = 70;  //0-100, used for determining when bass caps and drums start
     final int CALMZONE = 20;
 
     Queue queue;
@@ -98,7 +98,7 @@ public class Visualisation extends PApplet{
         signal = 100;
         openComport();
         
-        queue = new Queue();
+        queue = new Queue(3);
     }
 
     public void openComport()

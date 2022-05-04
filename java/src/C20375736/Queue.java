@@ -4,10 +4,11 @@ public class Queue {
     private float[] queue;
     private int tail;
 
-    final private int QUEUE_SIZE = 3;
+    private int QUEUE_SIZE;
 
-    public Queue()
+    public Queue(int size)
     {
+        QUEUE_SIZE = size;
         queue = new float[QUEUE_SIZE];
         
         tail = 0;
