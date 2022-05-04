@@ -34,14 +34,16 @@ public class Visualisation extends PApplet{
     
 
     float musicModifier;  //value from 0-100
+    float attention; 
     int signal;
 
     //for mode switch statemnet
     int mode = 0;
 
     final int MUSICSPLIT = 50;  //0-100, used for determining when bass caps and drums start
+    final int CALMZONE = 20;
 
-    
+    Queue queue;
 
     public void keyPressed() 
 	{
@@ -96,7 +98,7 @@ public class Visualisation extends PApplet{
         signal = 100;
         openComport();
         
-       
+        queue = new Queue();
     }
 
     public void openComport()
@@ -170,6 +172,7 @@ public class Visualisation extends PApplet{
             {
                 signal = 100;
                 musicModifier = map(mouseY, height, 0, 0, 100);
+                attention = musicModifier;
                 setStemsGain(musicModifier);
                 break;  //break must be here
             }
@@ -189,14 +192,24 @@ public class Visualisation extends PApplet{
 
                         if (bGoodData)
                         {
-                            System.out.println("Sig: "+ MindFlexReader.signalQuality + " Att: " + MindFlexReader.attention); 
+                            //System.out.println("Sig: "+ MindFlexReader.signalQuality + " Att: " + MindFlexReader.attention); 
                             
-                            //musicModifier = lerp(musicModifier, MindFlexReader.attention, 0.1f);
-                            musicModifier = MindFlexReader.attention;
+                            //musicModifier = lerp(musicModifier, MindFlexReader.attention, 0.f);
+                            //musicModifier = MindFlexReader.attention;
 
-                            
-                            
+                            if(queue.isFull())
+                            {
+                                queue.dequeue();
+                            }
+
+                            attention = MindFlexReader.attention;
                             signal = MindFlexReader.signalQuality;
+
+                            queue.enqueue(attention);
+
+                            musicModifier = queue.average();
+
+                            //System.out.println(musicModifier);
 
                             setStemsGain(musicModifier);
             
@@ -228,7 +241,7 @@ public class Visualisation extends PApplet{
         
         
         landscape.render(ambiBuffer,bassBuffer, drumBuffer, musicModifier, bassModifier(musicModifier), drumModifier(musicModifier), signal);
-        //ui.render(musicModifier, signal);
+        ui.render(attention, signal);
        
         
     }

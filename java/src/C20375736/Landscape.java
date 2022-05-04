@@ -41,7 +41,7 @@ public class Landscape
 		volley.drawBolts(drumBuffer, drumModifier);
 
         pa.popMatrix();  //restore matrix to default
-        ui.render(musicModifier, signal);
+        //ui.render(musicModifier, signal);
 
 
         
