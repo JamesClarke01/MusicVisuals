@@ -137,13 +137,17 @@ public class Visualisation extends PApplet{
     {
         float bassModifier;
 
-        if(modifier < MUSICSPLIT)  //bass will dynamically increase
+        if(modifier < MUSICSPLIT && modifier > CALMZONE)  //bass will dynamically increase
         {
-            bassModifier = map(modifier, 0, MUSICSPLIT, 0, 100);;
+            bassModifier = map(modifier, CALMZONE, MUSICSPLIT, 0, 100);;
         }
-        else  //bass is at max volume
-        {
+        else if(modifier > MUSICSPLIT)
+        { //bass is at max volume
             bassModifier = 100;
+        }
+        else
+        {
+            bassModifier = 0;
         }
 
         return bassModifier;
