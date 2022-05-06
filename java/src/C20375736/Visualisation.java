@@ -40,8 +40,8 @@ public class Visualisation extends PApplet{
     //for mode switch statemnet
     int mode = 0;
 
-    final int MUSICSPLIT = 70;  //0-100, used for determining when bass caps and drums start
-    final int CALMZONE = 20;
+    final int MUSICSPLIT = 60;  //0-100, used for determining when bass caps and drums start
+    final int CALMZONE = 25;
 
     Queue queue;
 
@@ -75,9 +75,10 @@ public class Visualisation extends PApplet{
         //audio stuff
         minim = new Minim(this);
 
-        ambiPlayer = minim.loadFile("ambiTestTrack.mp3", 1024);
-        drumPlayer = minim.loadFile("drumsTestTrack.mp3", 1024);
-        bassPlayer = minim.loadFile("bassTestTrack.mp3", 1024);
+        ambiPlayer = minim.loadFile("Ambi.mp3", 1024);
+        bassPlayer = minim.loadFile("Bass.mp3", 1024);
+        drumPlayer = minim.loadFile("Drums.mp3", 1024);
+        
         
         // ambiPlayer = minim.loadFile("mkmsAmbiAud.mp3", 1024);
         // drumPlayer = minim.loadFile("mkmsDrumsAud.mp3", 1024);
@@ -137,7 +138,7 @@ public class Visualisation extends PApplet{
     {
         float bassModifier;
 
-        if(modifier < MUSICSPLIT && modifier > CALMZONE)  //bass will dynamically increase
+        if(modifier <= MUSICSPLIT && modifier > CALMZONE)  //bass will dynamically increase
         {
             bassModifier = map(modifier, CALMZONE, MUSICSPLIT, 0, 100);;
         }
@@ -211,8 +212,8 @@ public class Visualisation extends PApplet{
 
                             queue.enqueue(attention);
 
-                            musicModifier = queue.average();
-
+                            //musicModifier = queue.average();
+                            musicModifier = attention;
                             //System.out.println(musicModifier);
 
                             setStemsGain(musicModifier);

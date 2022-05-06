@@ -38,7 +38,7 @@ public class Forest
 		float incrementZ = 100;
 		
         float treePosX = 0;
-		float treePosZ = 0;
+		float treePosZ = 65;
         Tree newTree;
         float treeSize;
 
