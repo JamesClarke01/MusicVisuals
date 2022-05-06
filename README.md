@@ -164,3 +164,13 @@ Each element plays a part in the visualisation and shows a storm emerging as the
 The sky darkens, trees sway more frantically, the clouds roll in and rumble, and finally the lightning strikes.
 All of this illustrates how the user's mind behaves as they focusing on a task. 
 As they need to recruit more of their mental bandwidth the music and visuals follow along giving a window into someone's mind as they wrap their brain around a task.
+
+## The music.
+
+To achieve the effect of different track emerging with the user's focus we used the different stems of the song.
+
+* The Ambience 
+* The Bass
+* The Drums
+
+This way the song would start out with just the calm ambience track, then the bass would come in with the clouds, and finally the track would complete with the drums and the lightning.
