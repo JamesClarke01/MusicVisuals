@@ -8,14 +8,24 @@
 
 ##### If you'd like to use the visualiser without the EEG, just press '1' on your keyboard to activate mouse mode
 
-We chose this song since it would work in conjunction with the peripheral device we were planning on using __The Mind Flex EEG__
+We chose this song since it would work in conjunction with the peripheral device we were planning on using __The Mindflex EEG__
 
-The Mind Flex is a device which can read your brain waves in order to operate a fan.
+The Mindflex is a childrens toy which can read your brain waves in order to operate a fan.
 We repurposed the device so it can use our brain waves to affect the nature of the visualiser.
 It works by measuring how much the wearer is focusing on a given task and it returns a number based on that.
 
 The reason we chose the song was because of how there are varying levels of intensity throughout it.
 This allows us to change the playback of the song so that users can get a clear reflection of their concentration levels and get instant feedback through the way the music changes and how that effects the visuals.
+
+#### Communication with the EEG
+The EEG connects to the user's computer over Bluetooth Comport. The comport is then read using the library 'jSerialComm'. 
+
+We implemented the code from the following repo pertaining to the low level reading of the comport, converting the Brain.cpp file to java.
+
+The code works by listening for certain bytes to determine a packets start and end, and then parsing said packet for information on the multiple "powerbands" that the EEG sends out. The only values we were concerned with was the one that represents users attention and signal quality, but there are many other values such as meditation, etc.
+
+
+
 
 #### The Visualisation consists of 4 Dynamic elements.
 

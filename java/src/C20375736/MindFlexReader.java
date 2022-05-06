@@ -1,3 +1,6 @@
+//Low level code for converting the brain reader to comport data to readable packets was ported to java from the following repo:
+//https://github.com/kitschpatrol/Brain 
+
 package C20375736;
 
 public class MindFlexReader {
@@ -131,10 +134,10 @@ public class MindFlexReader {
 			packetIndex++;
 		}
 
-		//Look for the start of packet
+		
 		if ((latestByte == 170) && (lastByte == 170) && !inPacket)
 		{
-			// Start of packet
+			
 			inPacket = true;
 			packetIndex = 0;
 			checksumAccumulator = 0;

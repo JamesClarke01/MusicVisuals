@@ -79,10 +79,6 @@ public class Visualisation extends PApplet{
         bassPlayer = minim.loadFile("Bass.mp3", 1024);
         drumPlayer = minim.loadFile("Drums.mp3", 1024);
         
-        
-        // ambiPlayer = minim.loadFile("mkmsAmbiAud.mp3", 1024);
-        // drumPlayer = minim.loadFile("mkmsDrumsAud.mp3", 1024);
-        // bassPlayer = minim.loadFile("mkmsBassAud.mp3", 1024);
 
         ambiPlayer.loop();
 		drumPlayer.loop();
@@ -199,8 +195,6 @@ public class Visualisation extends PApplet{
                         {
                             //System.out.println("Sig: "+ MindFlexReader.signalQuality + " Att: " + MindFlexReader.attention); 
                             
-                            //musicModifier = lerp(musicModifier, MindFlexReader.attention, 0.f);
-                            //musicModifier = MindFlexReader.attention;
 
                             if(queue.isFull())
                             {
@@ -212,9 +206,9 @@ public class Visualisation extends PApplet{
 
                             queue.enqueue(attention);
 
-                            //musicModifier = queue.average();
-                            musicModifier = attention;
-                            //System.out.println(musicModifier);
+                            //use queue for averaged out value
+                            musicModifier = queue.average();
+                            //musicModifier = attention;
 
                             setStemsGain(musicModifier);
             
