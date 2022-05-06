@@ -6,6 +6,8 @@
 
 ### Song choice : Mr.Kill Myself - Sewerslvt
 
+##### If you'd like to use the visualiser without the EEG, just press '1' on your keyboard to activate mouse mode
+
 We chose this song since it would work in conjunction with the peripheral device we were planning on using __The Mind Flex EEG__
 
 The Mind Flex is a device which can read your brain waves in order to operate a fan.
@@ -46,39 +48,19 @@ Rendering a forest posed some challenges. The main challenge being determining h
 
 We achieved this by making the trees sway to the ambient track. 
 ```java
-public void newRender(int n, float bassModifier) //n is number of branches!
-{	
-    float LEAF_MODIFIER = pa.map(bassModifier, 0, 100, 225, 130);
-    pa.colorMode(pa.HSB);
-    pa.pushMatrix();
-    pa.translate(xPos,yPos,zPos);  //go to tree position
-   // pa.noStroke();  //comment for outlines
-    pa.stroke(94, 54, 30);
-    //pa.stroke(150, 150, 150);
-    pa.translate(0, -trunkLength);
+for(int i = 0; i < n; i++)
+{
 	pa.pushMatrix();
-    pa.translate(offset, 0);
-    pa.sphereDetail(5);
-	pa.stroke(0);
-	float len = 100;
-	pa.translate(0,-len/2,0);
-	for(int i = 0; i < n; i++)
-	{
-		pa.pushMatrix();
-		pa.rotateZ(2*pa.PI*i/n);
-		if(i != 0) pa.rotateZ(offset/15);	
-		pa.translate(0,trunkLength/2,0);
-		pa.fill(255, pa.map(bassModifier, 0, 100, 255, 125), pa.map(bassModifier, 0, 100, 70, 50));  //trunk colour, rgb: 51, 5, 5
-		pa.box(trunkWidth,trunkLength,trunkWidth);
-		pa.translate(0,trunkLength/2,0);
-		pa.fill(90, LEAF_MODIFIER, LEAF_MODIFIER); //leaf colour, rgb: 0,255,0
-		if(i != 0) pa.sphere(sphereRadius); 
-		pa.popMatrix();
-	}
+	pa.rotateZ(2*pa.PI*i/n);
+	if(i != 0) pa.rotateZ(offset/15);	
+	pa.translate(0,trunkLength/2,0);
+	pa.fill(255, pa.map(bassModifier, 0, 100, 255, 125), pa.map(bassModifier, 0, 100, 70, 50));  //trunk colour, rgb: 51, 5, 5
+	pa.box(trunkWidth,trunkLength,trunkWidth);
+	pa.translate(0,trunkLength/2,0);
+	pa.fill(90, LEAF_MODIFIER, LEAF_MODIFIER); //leaf colour, rgb: 0,255,0
+	if(i != 0) pa.sphere(sphereRadius); 
 	pa.popMatrix();
-    pa.popMatrix();
-    pa.colorMode(pa.RGB);
-}	
+}
 ```
 
 ## Cloud
@@ -120,8 +102,6 @@ public void render(AudioBuffer bassBuffer,float modifier)
 	}
 	pa.pushMatrix();
 	//shapes and stuff go here
-	pa.translate(-(pa.width/2) + leftMax,-pa.height - 150,0);//Sets the postition of the cloud
-	pa.rotateX(pa.PI * 1.7f);
 	pa.fill(76, 77, 75, pa.map(modifier, 0, 100, 0, 255));  //set cloud colour/opacity
 	pa.stroke(0,0,0, pa.map(modifier, 0, 100, 0, 255));  //set outline colour
 	for(int i = 0; i < yCount-1; i++)
@@ -152,7 +132,7 @@ This means that the clouds look like their moving through the air while also rum
 Visualising a bolt of lightning was difficult since they are so spioradic in nature.
 ```java
 public void strike(int depth, float len, float drumModifier)
-	{
+{
 	pa.noStroke();
 	pa.fill(0,255,255, pa.map(drumModifier, 0, 100, 0, 255));
 		//229,254,69
@@ -175,5 +155,5 @@ To get the lightning rendered we utilised recursion. This was to provide sense t
 
 The drum modifier controls the transparency of the lightning and gives it an almost ethereal effect like it's actually made of electricity.
 
-
+All of these elements work in tandem to give the visualiser a feeling of coalescence. 
 
