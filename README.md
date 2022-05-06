@@ -153,7 +153,14 @@ public void strike(int depth, float len, float drumModifier)
 ```
 To get the lightning rendered we utilised recursion. This was to provide sense that the lightning was moving in a chaotic fashion while also providing us precise control over how deep the bolt is rendered along with the length of each segment. 
 
+Because of this recursive method it means that the lightning reacts to the drums with great precision and gives the impression that the sound of the drums is coming from the lightning.
+
 The drum modifier controls the transparency of the lightning and gives it an almost ethereal effect like it's actually made of electricity.
 
-All of these elements work in tandem to give the visualiser a feeling of coalescence. 
+### All of these elements work in tandem to give the visualiser a feeling of coalescence. 
 
+Each element plays a part in the visualisation and shows a storm emerging as the concentration ramps up.
+
+The sky darkens, trees sway more frantically, the clouds roll in and rumble, and finally the lightning strikes.
+All of this illustrates how the user's mind behaves as they focusing on a task. 
+As they need to recruit more of their mental bandwidth the music and visuals follow along giving a window into someone's mind as they wrap their brain around a task.
