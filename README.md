@@ -1,4 +1,4 @@
-# Soul-Mixer
+# Soul-Mixer - A Dynamic Music Visualisation Project
 
 ## Demonstration Video: https://youtu.be/g2lAJUHPwt0
 
