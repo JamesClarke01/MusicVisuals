@@ -1,4 +1,4 @@
-# Music Visualiser Project
+# Soul-Mixer
 
 ## Demonstration Video: https://youtu.be/g2lAJUHPwt0
 
